@@ -1,6 +1,6 @@
 {
   "type": "app",
-  "name": "NS1 App",
+  "name": "NS1 for Grafana",
   "id": "raintank-ns1-app",
 
   "staticRoot": ".",
@@ -18,7 +18,7 @@
   ],
 
   "info": {
-    "description": "NS1 App",
+    "description": "NS1 for Grafana allows for the collection and graphing of NS1 data over time.",
     "author": {
       "name": "NS1.",
       "url": "https://ns1.com"
