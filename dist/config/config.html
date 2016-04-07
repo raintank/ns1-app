@@ -1,0 +1,21 @@
+
+
+<h3 class="page-heading">NS1 Credentials</h3>
+<div class="gf-form-group">
+	<div class="gf-form">
+		<label class="gf-form-label width-10">Grafana.Net</label>
+		<!-- Hidden input to stop chrome from autofilling -->
+		<input style="display:none;" type="password" name="gnet_token" />
+		<input type="password" class="gf-form-input max-width-20" ng-model='ctrl.appModel.secureJsonData.gnet_token' placeholder="Grafana.net API Key"></input>
+	</div>
+	<div class="gf-form">
+		<label class="gf-form-label width-10">NS1 Api Key</label>
+		<!-- Hidden input to stop chrome from autofilling -->
+		<input style="display:none;" type="password" name="ns1_token" />
+		<input type="password" class="gf-form-input max-width-20" ng-model='ctrl.appModel.secureJsonData.ns1_token' placeholder="NS1 api token"></input>
+	</div>
+	<div ng-if="ctrl.error">
+		{{ctrl.error}}
+	</div>
+</div>
+

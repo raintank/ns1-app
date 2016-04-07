@@ -1,0 +1,58 @@
+{
+  "type": "app",
+  "name": "NS1 App",
+  "id": "raintank-ns1-app",
+
+  "staticRoot": ".",
+
+  "routes": [
+    {
+      "path": "api/account/settings",
+      "method": "GET",
+      "url": "https://api.nsone.net/v1/account/settings",
+      "reqSignedIn": true,
+      "headers": [
+        {"name": "X-NSONE-KEY", "content": "{{.SecureJsonData.ns1_token}}"}
+      ]
+    }
+  ],
+
+  "info": {
+    "description": "NS1 App",
+    "author": {
+      "name": "NS1.",
+      "url": "https://ns1.com"
+    },
+    "keywords": ["ns1", "dns"],
+    "logos": {
+      "small": "img/logo.png",
+      "large": "img/logo.png"
+    },
+    "links": [
+      {"name": "Project site", "url": "http://github.com/raintank/ns1-app"},
+      {"name": "License & Terms", "url": "https://github.com/raintank/ns1-app/blob/master/LICENSE"}
+    ],
+    "version": "0.0.1",
+    "updated": "2016-04-07"
+  },
+
+  "includes": [
+    {
+      "type": "dashboard",
+      "name": "NS1 Zones",
+      "path": "dashboards/ns1-zones.json",
+      "addToNav": true
+    },
+    {
+      "type": "dashboard",
+      "name": "NS1 Monitors",
+      "path": "dashboards/ns1-monitors.json",
+      "addToNav": true,
+      "defaultNav": true
+    }
+  ],
+
+  "dependencies": {
+    "grafanaVersion": "3.x.x"
+  }
+}
