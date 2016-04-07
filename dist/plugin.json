@@ -1,6 +1,6 @@
 {
   "type": "app",
-  "name": "NS1 App",
+  "name": "NS1 for Grafana",
   "id": "raintank-ns1-app",
 
   "staticRoot": ".",
@@ -18,7 +18,7 @@
   ],
 
   "info": {
-    "description": "NS1 App",
+    "description": "NS1 for Grafana allows for the collection and graphing of NS1 data over time.",
     "author": {
       "name": "NS1.",
       "url": "https://ns1.com"
@@ -35,6 +35,11 @@
     "version": "0.0.1",
     "updated": "2016-04-07"
   },
+
+  "screenshots": [
+        {"name": "Dashboard: Zones", "path": "src/img/ns1-dashboard-monitors.png"},
+        {"name": "Dashboard: Monitors", "path": "src/img/ns1-dashboard-zones.png"}
+      ],
 
   "includes": [
     {
