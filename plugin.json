@@ -36,6 +36,11 @@
     "updated": "2016-04-07"
   },
 
+  "screenshots": [
+        {"name": "Dashboard: Zones", "path": "src/img/ns1-dashboard-monitors.png"},
+        {"name": "Dashboard: Monitors", "path": "src/img/ns1-dashboard-zones.png"}
+      ],
+
   "includes": [
     {
       "type": "dashboard",
