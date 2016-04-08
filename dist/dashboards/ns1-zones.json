@@ -850,6 +850,10 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "",
+          "value": ""
+        },
         "datasource": null,
         "hide": 0,
         "includeAll": true,
@@ -857,7 +861,7 @@
         "multi": true,
         "name": "zone",
         "query": "raintank.apps.ns1.zones.*",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "type": "query",
         "useTags": false

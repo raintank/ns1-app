@@ -735,13 +735,6 @@
           "prefix": "",
           "prefixFontSize": "50%",
           "repeatIteration": 1460059032190,
-          "scopedVars": {
-            "monitor": {
-              "selected": false,
-              "text": "grafana-http-monitor",
-              "value": "grafana-http-monitor"
-            }
-          },
           "span": 3,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -816,13 +809,6 @@
           "points": false,
           "renderer": "flot",
           "repeatIteration": 1460059032190,
-          "scopedVars": {
-            "monitor": {
-              "selected": false,
-              "text": "grafana-http-monitor",
-              "value": "grafana-http-monitor"
-            }
-          },
           "seriesOverrides": [],
           "span": 3,
           "stack": false,
@@ -902,13 +888,6 @@
           "points": false,
           "renderer": "flot",
           "repeatIteration": 1460059032190,
-          "scopedVars": {
-            "monitor": {
-              "selected": false,
-              "text": "grafana-http-monitor",
-              "value": "grafana-http-monitor"
-            }
-          },
           "seriesOverrides": [],
           "span": 3,
           "stack": false,
@@ -988,13 +967,6 @@
           "renderer": "flot",
           "repeat": "zone",
           "repeatIteration": 1460059032190,
-          "scopedVars": {
-            "monitor": {
-              "selected": false,
-              "text": "grafana-http-monitor",
-              "value": "grafana-http-monitor"
-            }
-          },
           "seriesOverrides": [],
           "span": 3,
           "stack": false,
@@ -1041,13 +1013,6 @@
       "repeat": null,
       "repeatIteration": 1460059032190,
       "repeatRowId": 3,
-      "scopedVars": {
-        "monitor": {
-          "selected": false,
-          "text": "grafana-http-monitor",
-          "value": "grafana-http-monitor"
-        }
-      },
       "showTitle": true,
       "title": "$monitor DETAILS"
     },
@@ -1081,13 +1046,6 @@
           "prefix": "",
           "prefixFontSize": "50%",
           "repeatIteration": 1460059032190,
-          "scopedVars": {
-            "monitor": {
-              "selected": false,
-              "text": "nsone",
-              "value": "nsone"
-            }
-          },
           "span": 3,
           "sparkline": {
             "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -1162,13 +1120,6 @@
           "points": false,
           "renderer": "flot",
           "repeatIteration": 1460059032190,
-          "scopedVars": {
-            "monitor": {
-              "selected": false,
-              "text": "nsone",
-              "value": "nsone"
-            }
-          },
           "seriesOverrides": [],
           "span": 3,
           "stack": false,
@@ -1248,13 +1199,6 @@
           "points": false,
           "renderer": "flot",
           "repeatIteration": 1460059032190,
-          "scopedVars": {
-            "monitor": {
-              "selected": false,
-              "text": "nsone",
-              "value": "nsone"
-            }
-          },
           "seriesOverrides": [],
           "span": 3,
           "stack": false,
@@ -1334,13 +1278,6 @@
           "renderer": "flot",
           "repeat": "zone",
           "repeatIteration": 1460059032190,
-          "scopedVars": {
-            "monitor": {
-              "selected": false,
-              "text": "nsone",
-              "value": "nsone"
-            }
-          },
           "seriesOverrides": [],
           "span": 3,
           "stack": false,
@@ -1387,13 +1324,6 @@
       "repeat": null,
       "repeatIteration": 1460059032190,
       "repeatRowId": 3,
-      "scopedVars": {
-        "monitor": {
-          "selected": false,
-          "text": "nsone",
-          "value": "nsone"
-        }
-      },
       "showTitle": true,
       "title": "$monitor DETAILS"
     },
@@ -1680,13 +1610,6 @@
           "renderer": "flot",
           "repeat": "zone",
           "repeatIteration": 1460059032190,
-          "scopedVars": {
-            "monitor": {
-              "selected": false,
-              "text": "raintank-website",
-              "value": "raintank-website"
-            }
-          },
           "seriesOverrides": [],
           "span": 3,
           "stack": false,
@@ -1777,11 +1700,8 @@
     "list": [
       {
         "current": {
-          "tags": [],
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
+          "text": "",
+          "value": ""
         },
         "datasource": null,
         "hide": 0,
@@ -1789,35 +1709,9 @@
         "label": "monitor",
         "multi": true,
         "name": "monitor",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "google",
-            "value": "google"
-          },
-          {
-            "selected": false,
-            "text": "grafana-http-monitor",
-            "value": "grafana-http-monitor"
-          },
-          {
-            "selected": false,
-            "text": "nsone",
-            "value": "nsone"
-          },
-          {
-            "selected": false,
-            "text": "raintank-website",
-            "value": "raintank-website"
-          }
-        ],
+        "options": [],
         "query": "raintank.apps.ns1.monitoring.*",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "type": "query",
         "useTags": false
@@ -1833,30 +1727,9 @@
         "label": "location",
         "multi": false,
         "name": "location",
-        "options": [
-          {
-            "selected": false,
-            "text": "ams",
-            "value": "ams"
-          },
-          {
-            "selected": false,
-            "text": "dal",
-            "value": "dal"
-          },
-          {
-            "selected": true,
-            "text": "global",
-            "value": "global"
-          },
-          {
-            "selected": false,
-            "text": "lga",
-            "value": "lga"
-          }
-        ],
+        "options": [],
         "query": "raintank.apps.ns1.monitoring.$monitor.*",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "type": "query",
         "useTags": false
