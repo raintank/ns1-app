@@ -92,7 +92,7 @@ class Ns1ConfigCtrl {
     return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks", {metric: "/raintank/apps/ns1/_all", name: taskName}).then((resp) => {
       console.log(resp);
       if (resp.body.length > 0 ){
-        self.task = resp.body;
+        self.task = resp.body[0];
         self.taskStatus = "Task running";
         return true;
       }
@@ -105,7 +105,7 @@ class Ns1ConfigCtrl {
       console.log("unknown task name.");
       return;
     }
-    return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks/"+this.task.id).then((resp) => {
+    return this.backendSrv.delete("/api/plugin-proxy/raintank-ns1-app/tasks/"+this.task.id).then((resp) => {
       console.log(resp);
       this.task = {};
       this.taskStatus = "Task not found";

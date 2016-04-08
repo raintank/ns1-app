@@ -136,7 +136,7 @@ System.register(["./config.html!text"], function (_export, _context) {
             return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks", { metric: "/raintank/apps/ns1/_all", name: taskName }).then(function (resp) {
               console.log(resp);
               if (resp.body.length > 0) {
-                self.task = resp.body;
+                self.task = resp.body[0];
                 self.taskStatus = "Task running";
                 return true;
               }
@@ -152,7 +152,7 @@ System.register(["./config.html!text"], function (_export, _context) {
               console.log("unknown task name.");
               return;
             }
-            return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks/" + this.task.id).then(function (resp) {
+            return this.backendSrv.delete("/api/plugin-proxy/raintank-ns1-app/tasks/" + this.task.id).then(function (resp) {
               console.log(resp);
               _this3.task = {};
               _this3.taskStatus = "Task not found";
