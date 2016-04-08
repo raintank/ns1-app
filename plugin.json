@@ -7,12 +7,30 @@
 
   "routes": [
     {
-      "path": "api/account/settings",
+      "path": "ns1/account/settings",
       "method": "GET",
       "url": "https://api.nsone.net/v1/account/settings",
       "reqSignedIn": true,
       "headers": [
         {"name": "X-NSONE-KEY", "content": "{{.SecureJsonData.ns1_token}}"}
+      ]
+    },
+    {
+      "path": "tasks",
+      "method": "*",
+      "url": "http://localhost:8082/api/v1/tasks",
+      "reqSignedIn": true,
+      "headers": [
+        {"name": "Authorization", "content": "Bearer {{.SecureJsonData.gnet_token}}"}
+      ]
+    },
+    {
+      "path": "tasks/*",
+      "method": "DELETE",
+      "url": "http://localhost:8082/api/v1/tasks",
+      "reqSignedIn": true,
+      "headers": [
+        {"name": "Authorization", "content": "Bearer {{.SecureJsonData.gnet_token}}"}
       ]
     }
   ],
@@ -37,9 +55,9 @@
   },
 
   "screenshots": [
-        {"name": "Dashboard: Zones", "path": "src/img/ns1-dashboard-monitors.png"},
-        {"name": "Dashboard: Monitors", "path": "src/img/ns1-dashboard-zones.png"}
-      ],
+    {"name": "Dashboard: Zones", "path": "src/img/ns1-dashboard-monitors.png"},
+    {"name": "Dashboard: Monitors", "path": "src/img/ns1-dashboard-zones.png"}
+  ],
 
   "includes": [
     {
