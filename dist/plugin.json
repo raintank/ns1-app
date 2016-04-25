@@ -18,7 +18,7 @@
     {
       "path": "tasks",
       "method": "*",
-      "url": "http://localhost:8082/api/v1/tasks",
+      "url": "https://task-server.raintank.io/api/v1/tasks",
       "reqSignedIn": true,
       "headers": [
         {"name": "Authorization", "content": "Bearer {{.SecureJsonData.gnet_token}}"}
@@ -27,10 +27,30 @@
     {
       "path": "tasks/*",
       "method": "DELETE",
-      "url": "http://localhost:8082/api/v1/tasks",
+      "url": "http://task-server.raintank.io/api/v1/tasks",
       "reqSignedIn": true,
       "headers": [
         {"name": "Authorization", "content": "Bearer {{.SecureJsonData.gnet_token}}"}
+      ]
+    },
+    { 
+      "path": "graphite/*",
+      "method": "*",
+      "url": "https://tsdb.raintank.io/graphite",
+      "reqSignedIn": true,
+      "reqRole": "Viewer",
+      "headers": [
+        { "name": "Authorization", "content": "Bearer {{.SecureJsonData.gnet_token}}"}
+      ]
+    },
+    { 
+      "path": "elasticsearch/*",
+      "method": "*",
+      "url": "https://tsdb.raintank.io/elasticsearch",
+      "reqSignedIn": true,
+      "reqRole": "Viewer",
+      "headers": [
+        { "name": "Authorization", "content": "Bearer {{.SecureJsonData.gnet_token}}"}
       ]
     }
   ],

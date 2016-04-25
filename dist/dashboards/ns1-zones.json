@@ -16,7 +16,7 @@
       "panels": [
         {
           "bars": true,
-          "datasource": null,
+          "datasource": "raintank",
           "decimals": 1,
           "editable": true,
           "error": false,
@@ -108,7 +108,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -185,7 +185,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -264,7 +264,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -343,7 +343,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -422,7 +422,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -501,7 +501,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -580,7 +580,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -659,7 +659,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -738,7 +738,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -819,8 +819,8 @@
     }
   ],
   "time": {
-    "from": "2016-04-07T17:41:19.578Z",
-    "to": "2016-04-07T19:51:38.368Z"
+    "from": "now-3h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -854,7 +854,7 @@
           "text": "",
           "value": ""
         },
-        "datasource": null,
+        "datasource": "raintank",
         "hide": 0,
         "includeAll": true,
         "label": "zone",
@@ -873,6 +873,6 @@
   },
   "refresh": false,
   "schemaVersion": 12,
-  "version": 12,
+  "version": 13,
   "links": []
 }

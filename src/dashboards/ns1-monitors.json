@@ -17,7 +17,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "decimals": 1,
           "editable": true,
           "error": false,
@@ -100,7 +100,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "decimals": 1,
           "editable": true,
           "error": false,
@@ -191,7 +191,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "decimals": 1,
           "editable": true,
           "error": false,
@@ -276,7 +276,7 @@
         {
           "aliasColors": {},
           "bars": true,
-          "datasource": null,
+          "datasource": "raintank",
           "decimals": 1,
           "editable": true,
           "error": false,
@@ -375,7 +375,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "format": "none",
@@ -437,7 +437,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -524,7 +524,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -611,7 +611,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -719,7 +719,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "format": "none",
@@ -774,7 +774,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -854,7 +854,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -934,7 +934,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1030,7 +1030,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "format": "none",
@@ -1085,7 +1085,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1165,7 +1165,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1245,7 +1245,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1341,7 +1341,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "format": "none",
@@ -1403,7 +1403,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1490,7 +1490,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1577,7 +1577,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": null,
+          "datasource": "raintank",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -1668,8 +1668,8 @@
     }
   ],
   "time": {
-    "from": "2016-04-07T17:16:05.684Z",
-    "to": "2016-04-07T18:42:47.317Z"
+    "from": "now-3h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1703,7 +1703,7 @@
           "text": "",
           "value": ""
         },
-        "datasource": null,
+        "datasource": "raintank",
         "hide": 0,
         "includeAll": true,
         "label": "monitor",
@@ -1721,7 +1721,7 @@
           "text": "global",
           "value": "global"
         },
-        "datasource": null,
+        "datasource": "raintank",
         "hide": 0,
         "includeAll": false,
         "label": "location",
@@ -1741,6 +1741,6 @@
   },
   "refresh": false,
   "schemaVersion": 12,
-  "version": 27,
+  "version": 28,
   "links": []
 }

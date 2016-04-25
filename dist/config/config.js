@@ -67,7 +67,7 @@ System.register(["./config.html!text"], function (_export, _context) {
             if (this.appModel.secureJsonData.gnet_token) {
               this.appModel.jsonData.gnetTokenSet = true;
             }
-            return Promise.resolve();
+            return this.initDatasource();
           }
         }, {
           key: "postUpdate",
@@ -112,14 +112,14 @@ System.register(["./config.html!text"], function (_export, _context) {
               }
               var task = {
                 "name": taskName,
-                "metrics": { "/raintank/apps/ns1/_all": 0 },
+                "metrics": { "/raintank/apps/ns1/*": 0 },
                 "config": {
                   "/raintank/apps/ns1": {
                     "ns1_key": self.appModel.secureJsonData.ns1_token
                   }
                 },
                 "interval": 60,
-                "route": { "type": "any", "config": { id: 1 } },
+                "route": { "type": "any" },
                 "enabled": true
               };
 
@@ -133,7 +133,7 @@ System.register(["./config.html!text"], function (_export, _context) {
           key: "getTask",
           value: function getTask(taskName) {
             var self = this;
-            return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks", { metric: "/raintank/apps/ns1/_all", name: taskName }).then(function (resp) {
+            return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks", { metric: "/raintank/apps/ns1/*", name: taskName }).then(function (resp) {
               console.log(resp);
               if (resp.body.length > 0) {
                 self.task = resp.body[0];
@@ -156,6 +156,56 @@ System.register(["./config.html!text"], function (_export, _context) {
               console.log(resp);
               _this3.task = {};
               _this3.taskStatus = "Task not found";
+            });
+          }
+        }, {
+          key: "initDatasource",
+          value: function initDatasource() {
+            var self = this;
+            //check for existing datasource.
+            return self.backendSrv.get('/api/datasources').then(function (results) {
+              var foundGraphite = false;
+              var foundElastic = false;
+              _.forEach(results, function (ds) {
+                if (foundGraphite && foundElastic) {
+                  return;
+                }
+                if (ds.name === "raintank") {
+                  foundGraphite = true;
+                }
+                if (ds.name === "raintankEvents") {
+                  foundElastic = true;
+                }
+              });
+              var promises = [];
+              if (!foundGraphite) {
+                // create datasource.
+                var graphite = {
+                  name: 'raintank',
+                  type: 'graphite',
+                  url: 'api/plugin-proxy/raintank-ns1-app/graphite',
+                  access: 'direct',
+                  jsonData: {}
+                };
+                promises.push(self.backendSrv.post('/api/datasources', graphite));
+              }
+              if (!foundElastic) {
+                // create datasource.
+                var elastic = {
+                  name: 'raintankEvents',
+                  type: 'elasticsearch',
+                  url: 'api/plugin-proxy/raintank-ns1-app/elasticsearch',
+                  access: 'direct',
+                  database: '[events-]YYYY-MM-DD',
+                  jsonData: {
+                    esVersion: 1,
+                    interval: "Daily",
+                    timeField: "timestamp"
+                  }
+                };
+                promises.push(self.backendSrv.post('/api/datasources', elastic));
+              }
+              return Promise.all(promises);
             });
           }
         }]);
