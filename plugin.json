@@ -27,7 +27,7 @@
     {
       "path": "tasks/*",
       "method": "DELETE",
-      "url": "http://task-server.raintank.io/api/v1/tasks",
+      "url": "https://task-server.raintank.io/api/v1/tasks",
       "reqSignedIn": true,
       "headers": [
         {"name": "Authorization", "content": "Bearer {{.SecureJsonData.gnet_token}}"}

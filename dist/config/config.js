@@ -53,7 +53,16 @@ System.register(["./config.html!text"], function (_export, _context) {
           if (this.appModel.enabled) {
             this.getCustomerId().then(function (resp) {
               var taskName = self.taskName(resp.customerid);
-              self.getTask(taskName);
+              self.getTask(taskName).then(function (exists) {
+                if (!exists) {
+                  self.appModel.jsonData.ns1TokenSet = false;
+                  self.error = "Please re-enter NS1 apiKey and hit update to create the task.";
+                }
+              });
+            }, function () {
+              // if we cant get the customerId, then we need to re-enter the ns1Token.
+              self.appModel.jsonData.ns1TokenSet = false;
+              self.error = "invalid NS1 apiKey. Please update the key.";
             });
           }
         }
@@ -80,12 +89,20 @@ System.register(["./config.html!text"], function (_export, _context) {
             }
             // make sure our Api key works.
             return this.getCustomerId().then(function (resp) {
-              return self.ensureTask(resp.customerid).then(function () {
+              var p = self.ensureTask(resp.customerid);
+              p.then(function () {
                 return _this.appEditCtrl.importDashboards();
+              }, function () {
+                console.log("failed to add task.");
+                self.appModel.enabled = false;
+                self.error = "Unable to add collector task. Please try again.";
+                self.appModel.jsonData.ns1TokenSet = false;
               });
+              return p;
             }, function () {
               console.log("failed to query NS1 API.");
               self.error = "Unable to query NS1 API. please re-enter API Key";
+              self.appModel.jsonData.ns1TokenSet = false;
             });
           }
         }, {
@@ -123,10 +140,12 @@ System.register(["./config.html!text"], function (_export, _context) {
                 "enabled": true
               };
 
-              return self.backendSrv.post("/api/plugin-proxy/raintank-ns1-app/tasks", task).then(function (resp) {
+              var p = self.backendSrv.post("/api/plugin-proxy/raintank-ns1-app/tasks", task);
+              p.then(function (resp) {
                 _this2.task = resp.body;
                 self.taskStatus = "Task running";
               });
+              return p;
             });
           }
         }, {
@@ -153,7 +172,6 @@ System.register(["./config.html!text"], function (_export, _context) {
               return;
             }
             return this.backendSrv.delete("/api/plugin-proxy/raintank-ns1-app/tasks/" + this.task.id).then(function (resp) {
-              console.log(resp);
               _this3.task = {};
               _this3.taskStatus = "Task not found";
             });

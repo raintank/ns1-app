@@ -7,7 +7,7 @@ class Ns1ConfigCtrl {
     if (this.appModel.jsonData === null) {
       this.appModel.jsonData = {
         gnetTokenSet: false,
-        ns1TokenSet: false
+        ns1TokenSet: false,
       };
     }
     this.taskStatus = "Task not found";
@@ -19,17 +19,26 @@ class Ns1ConfigCtrl {
     if (this.appModel.enabled) {
       this.getCustomerId().then((resp) => {
         var taskName = self.taskName(resp.customerid);
-        self.getTask(taskName);
+        self.getTask(taskName).then((exists) => {
+          if (!exists) {
+            self.appModel.jsonData.ns1TokenSet = false;
+            self.error = "Please re-enter NS1 apiKey and hit update to create the task.";
+          }
+        });
+      }, () => {
+        // if we cant get the customerId, then we need to re-enter the ns1Token.
+        self.appModel.jsonData.ns1TokenSet = false;
+        self.error = "invalid NS1 apiKey. Please update the key.";
       });
     }
   }
 
   preUpdate() {
     if (this.appModel.secureJsonData.ns1_token) {
-      this.appModel.jsonData.ns1TokenSet =true;
+      this.appModel.jsonData.ns1TokenSet = true;
     }
     if (this.appModel.secureJsonData.gnet_token) {
-      this.appModel.jsonData.gnetTokenSet =true;
+      this.appModel.jsonData.gnetTokenSet = true;
     }
     return this.initDatasource();
   }
@@ -42,13 +51,21 @@ class Ns1ConfigCtrl {
     // make sure our Api key works.
     return this.getCustomerId()
     .then((resp) => {
-      return self.ensureTask(resp.customerid).then(() => {
+      var p = self.ensureTask(resp.customerid)
+      p.then(() => {
         return this.appEditCtrl.importDashboards(); 
+      }, () => {
+        console.log("failed to add task.");
+        self.appModel.enabled = false;
+        self.error = "Unable to add collector task. Please try again.";
+        self.appModel.jsonData.ns1TokenSet = false;
       });
+      return p;
     }, () => {
       console.log("failed to query NS1 API.");
     	self.error = "Unable to query NS1 API. please re-enter API Key";
-    })
+      self.appModel.jsonData.ns1TokenSet = false;
+    });
   }
 
   getCustomerId() {
@@ -80,16 +97,19 @@ class Ns1ConfigCtrl {
         "enabled": true
       };
 
-      return self.backendSrv.post("/api/plugin-proxy/raintank-ns1-app/tasks", task).then((resp) => {
+      var p = self.backendSrv.post("/api/plugin-proxy/raintank-ns1-app/tasks", task)
+      p.then((resp) => {
         this.task = resp.body;
         self.taskStatus = "Task running";
       });
+      return p;
     });
   }
 
   getTask(taskName) {
     var self = this;
-    return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks", {metric: "/raintank/apps/ns1/*", name: taskName}).then((resp) => {
+    return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks", {metric: "/raintank/apps/ns1/*", name: taskName})
+    .then((resp) => {
       console.log(resp);
       if (resp.body.length > 0 ){
         self.task = resp.body[0];
@@ -106,7 +126,6 @@ class Ns1ConfigCtrl {
       return;
     }
     return this.backendSrv.delete("/api/plugin-proxy/raintank-ns1-app/tasks/"+this.task.id).then((resp) => {
-      console.log(resp);
       this.task = {};
       this.taskStatus = "Task not found";
     });
