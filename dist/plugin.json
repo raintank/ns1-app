@@ -33,7 +33,7 @@
         {"name": "Authorization", "content": "Bearer {{.SecureJsonData.gnet_token}}"}
       ]
     },
-    { 
+    {
       "path": "graphite/*",
       "method": "*",
       "url": "https://tsdb.raintank.io/graphite",
@@ -43,7 +43,7 @@
         { "name": "Authorization", "content": "Bearer {{.SecureJsonData.gnet_token}}"}
       ]
     },
-    { 
+    {
       "path": "elasticsearch/*",
       "method": "*",
       "url": "https://tsdb.raintank.io/elasticsearch",
