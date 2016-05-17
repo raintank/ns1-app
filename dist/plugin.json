@@ -63,8 +63,8 @@
     },
     "keywords": ["ns1", "dns"],
     "logos": {
-      "small": "img/logo.png",
-      "large": "img/logo.png"
+      "small": "img/ns1_logo.png",
+      "large": "img/ns1_logo.png"
     },
     "links": [
       {"name": "Project site", "url": "http://github.com/raintank/ns1-app"},
