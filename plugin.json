@@ -1,7 +1,7 @@
 {
   "type": "app",
   "name": "NS1 for Grafana",
-  "id": "raintank-ns1-app",
+  "id": "ns1-app",
 
   "staticRoot": ".",
 
@@ -71,7 +71,7 @@
       {"name": "License & Terms", "url": "https://github.com/raintank/ns1-app/blob/master/LICENSE"}
     ],
     "version": "0.0.1",
-    "updated": "2016-04-07"
+    "updated": "2016-05-17"
   },
 
   "screenshots": [

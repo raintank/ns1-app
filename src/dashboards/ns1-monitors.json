@@ -394,8 +394,8 @@
           "scopedVars": {
             "monitor": {
               "selected": false,
-              "text": "google",
-              "value": "google"
+              "text": "",
+              "value": ""
             }
           },
           "span": 3,
@@ -475,8 +475,8 @@
           "scopedVars": {
             "monitor": {
               "selected": false,
-              "text": "google",
-              "value": "google"
+              "text": "",
+              "value": ""
             }
           },
           "seriesOverrides": [],
@@ -561,8 +561,8 @@
           "scopedVars": {
             "monitor": {
               "selected": false,
-              "text": "google",
-              "value": "google"
+              "text": "",
+              "value": ""
             }
           },
           "seriesOverrides": [],
@@ -647,8 +647,8 @@
           "scopedVars": {
             "monitor": {
               "selected": false,
-              "text": "google",
-              "value": "google"
+              "text": "",
+              "value": ""
             }
           },
           "seriesOverrides": [],
@@ -698,8 +698,8 @@
       "scopedVars": {
         "monitor": {
           "selected": false,
-          "text": "google",
-          "value": "google"
+          "text": "",
+          "value": ""
         }
       },
       "showTitle": true,
