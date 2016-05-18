@@ -10,7 +10,7 @@ class Ns1ConfigCtrl {
         ns1TokenSet: false,
       };
     }
-    this.taskStatus = "Task not found";
+    this.taskStatus = "Task status unknown";
     this.task = {};
     this.error = false;
     this.appEditCtrl.setPreUpdateHook(this.preUpdate.bind(this));
@@ -48,10 +48,13 @@ class Ns1ConfigCtrl {
     if (!this.appModel.enabled) {
       return Promise.resolve();
     }
+    if (!this.appModel.jsonData.ns1TokenSet) {
+      return Promise.resolve();
+    }
     // make sure our Api key works.
     return this.getCustomerId()
     .then((resp) => {
-      var p = self.ensureTask(resp.customerid)
+      var p = self.ensureTask(resp.customerid, self.appModel.secureJsonData.ns1_token);
       p.then(() => {
         return this.appEditCtrl.importDashboards(); 
       }, () => {
@@ -76,12 +79,15 @@ class Ns1ConfigCtrl {
     return "NS1-" + customerid;
   }
 
-  ensureTask(customerid) {
+  ensureTask(customerid, ns1Token) {
+    if (!ns1Token) {
+      return Promise.reject("ns1 token not set.");
+    }
     var self = this;
     var taskName = this.taskName(customerid);
     return this.getTask(taskName).then((exists) => {
       if (exists) {
-        self.taskStatus = "Task not created";
+        self.taskStatus = "Task exists.";
         return;
       }
       var task = {
@@ -89,7 +95,7 @@ class Ns1ConfigCtrl {
         "metrics": {"/raintank/apps/ns1/*":0},
         "config": {
           "/raintank/apps/ns1": {
-            "ns1_key": self.appModel.secureJsonData.ns1_token
+            "ns1_key": ns1Token
           }
         },
         "interval": 60,
@@ -100,7 +106,7 @@ class Ns1ConfigCtrl {
       var p = self.backendSrv.post("/api/plugin-proxy/raintank-ns1-app/tasks", task)
       p.then((resp) => {
         this.task = resp.body;
-        self.taskStatus = "Task running";
+        self.taskStatus = "Task created.";
       });
       return p;
     });
@@ -110,10 +116,10 @@ class Ns1ConfigCtrl {
     var self = this;
     return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks", {metric: "/raintank/apps/ns1/*", name: taskName})
     .then((resp) => {
-      console.log(resp);
+      //console.log(resp);
       if (resp.body.length > 0 ){
         self.task = resp.body[0];
-        self.taskStatus = "Task running";
+        self.taskStatus = "Task exists.";
         return true;
       }
       return false;
@@ -121,16 +127,22 @@ class Ns1ConfigCtrl {
   }
 
   stopTask() {
+    this.appModel.jsonData.ns1TokenSet=false;
     if (!this.task) {
       console.log("unknown task name.");
       return;
     }
     return this.backendSrv.delete("/api/plugin-proxy/raintank-ns1-app/tasks/"+this.task.id).then((resp) => {
       this.task = {};
-      this.taskStatus = "Task not found";
+      this.taskStatus = "Task not found.";
     });
   }
 
+  resetNs1Token() {
+    this.appModel.jsonData.ns1TokenSet=false;
+    this.task = {};
+    this.taskStatus = "Task status unknown."
+  }
   initDatasource() {
     var self = this;
     //check for existing datasource.

@@ -1,6 +1,8 @@
 "use strict";
 
 System.register(["./config.html!text"], function (_export, _context) {
+  "use strict";
+
   var configTemplate, _createClass, Ns1ConfigCtrl;
 
   function _classCallCheck(instance, Constructor) {
@@ -44,7 +46,7 @@ System.register(["./config.html!text"], function (_export, _context) {
               ns1TokenSet: false
             };
           }
-          this.taskStatus = "Task not found";
+          this.taskStatus = "Task status unknown";
           this.task = {};
           this.error = false;
           this.appEditCtrl.setPreUpdateHook(this.preUpdate.bind(this));
@@ -87,9 +89,12 @@ System.register(["./config.html!text"], function (_export, _context) {
             if (!this.appModel.enabled) {
               return Promise.resolve();
             }
+            if (!this.appModel.jsonData.ns1TokenSet) {
+              return Promise.resolve();
+            }
             // make sure our Api key works.
             return this.getCustomerId().then(function (resp) {
-              var p = self.ensureTask(resp.customerid);
+              var p = self.ensureTask(resp.customerid, self.appModel.secureJsonData.ns1_token);
               p.then(function () {
                 return _this.appEditCtrl.importDashboards();
               }, function () {
@@ -117,14 +122,17 @@ System.register(["./config.html!text"], function (_export, _context) {
           }
         }, {
           key: "ensureTask",
-          value: function ensureTask(customerid) {
+          value: function ensureTask(customerid, ns1Token) {
             var _this2 = this;
 
+            if (!ns1Token) {
+              return Promise.reject("ns1 token not set.");
+            }
             var self = this;
             var taskName = this.taskName(customerid);
             return this.getTask(taskName).then(function (exists) {
               if (exists) {
-                self.taskStatus = "Task not created";
+                self.taskStatus = "Task exists.";
                 return;
               }
               var task = {
@@ -132,7 +140,7 @@ System.register(["./config.html!text"], function (_export, _context) {
                 "metrics": { "/raintank/apps/ns1/*": 0 },
                 "config": {
                   "/raintank/apps/ns1": {
-                    "ns1_key": self.appModel.secureJsonData.ns1_token
+                    "ns1_key": ns1Token
                   }
                 },
                 "interval": 60,
@@ -143,7 +151,7 @@ System.register(["./config.html!text"], function (_export, _context) {
               var p = self.backendSrv.post("/api/plugin-proxy/raintank-ns1-app/tasks", task);
               p.then(function (resp) {
                 _this2.task = resp.body;
-                self.taskStatus = "Task running";
+                self.taskStatus = "Task created.";
               });
               return p;
             });
@@ -153,10 +161,10 @@ System.register(["./config.html!text"], function (_export, _context) {
           value: function getTask(taskName) {
             var self = this;
             return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks", { metric: "/raintank/apps/ns1/*", name: taskName }).then(function (resp) {
-              console.log(resp);
+              //console.log(resp);
               if (resp.body.length > 0) {
                 self.task = resp.body[0];
-                self.taskStatus = "Task running";
+                self.taskStatus = "Task exists.";
                 return true;
               }
               return false;
@@ -167,14 +175,22 @@ System.register(["./config.html!text"], function (_export, _context) {
           value: function stopTask() {
             var _this3 = this;
 
+            this.appModel.jsonData.ns1TokenSet = false;
             if (!this.task) {
               console.log("unknown task name.");
               return;
             }
             return this.backendSrv.delete("/api/plugin-proxy/raintank-ns1-app/tasks/" + this.task.id).then(function (resp) {
               _this3.task = {};
-              _this3.taskStatus = "Task not found";
+              _this3.taskStatus = "Task not found.";
             });
+          }
+        }, {
+          key: "resetNs1Token",
+          value: function resetNs1Token() {
+            this.appModel.jsonData.ns1TokenSet = false;
+            this.task = {};
+            this.taskStatus = "Task status unknown.";
           }
         }, {
           key: "initDatasource",

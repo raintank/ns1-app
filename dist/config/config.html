@@ -15,14 +15,14 @@
 		<input style="display:none;" type="password" name="ns1_token" />
 		<input type="password" class="gf-form-input max-width-20" ng-model="ctrl.appModel.secureJsonData.ns1_token" placeholder="NS1 api token" ng-show="!ctrl.appModel.jsonData.ns1TokenSet" />
 		<input type="text" class="gf-form-input max-width-20" disabled="disabled" value="saved" ng-show="ctrl.appModel.jsonData.ns1TokenSet" />
-		<a href="#" ng-click="ctrl.appModel.jsonData.ns1TokenSet=false" ng-if="ctrl.appModel.jsonData.ns1TokenSet">reset</a>
+		<a href="#" ng-click="ctrl.resetNs1Token()" ng-if="ctrl.appModel.jsonData.ns1TokenSet">reset</a>
 	</div>
 
 	<div ng-show="ctrl.error">
 		{{ctrl.error}}
 	</div>
 	<div ng-show="ctrl.appModel.enabled">
-		{{ctrl.taskStatus}}
+		{{ctrl.taskStatus}}:
 		<a href=# ng-click="ctrl.stopTask()" ng-if="ctrl.task.id">Delete Task</a>
 	</div>
 </div>
