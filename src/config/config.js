@@ -103,7 +103,7 @@ class Ns1ConfigCtrl {
         "enabled": true
       };
 
-      var p = self.backendSrv.post("/api/plugin-proxy/raintank-ns1-app/tasks", task)
+      var p = self.backendSrv.post("api/plugin-proxy/raintank-ns1-app/tasks", task)
       p.then((resp) => {
         this.task = resp.body;
         self.taskStatus = "Task created.";
@@ -114,7 +114,7 @@ class Ns1ConfigCtrl {
 
   getTask(taskName) {
     var self = this;
-    return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks", {metric: "/raintank/apps/ns1/*", name: taskName})
+    return this.backendSrv.get("api/plugin-proxy/raintank-ns1-app/tasks", {metric: "/raintank/apps/ns1/*", name: taskName})
     .then((resp) => {
       //console.log(resp);
       if (resp.body.length > 0 ){
@@ -132,7 +132,7 @@ class Ns1ConfigCtrl {
       console.log("unknown task name.");
       return;
     }
-    return this.backendSrv.delete("/api/plugin-proxy/raintank-ns1-app/tasks/"+this.task.id).then((resp) => {
+    return this.backendSrv.delete("api/plugin-proxy/raintank-ns1-app/tasks/"+this.task.id).then((resp) => {
       this.task = {};
       this.taskStatus = "Task not found.";
     });
@@ -146,7 +146,7 @@ class Ns1ConfigCtrl {
   initDatasource() {
     var self = this;
     //check for existing datasource.
-    return self.backendSrv.get('/api/datasources').then(function(results) {
+    return self.backendSrv.get('api/datasources').then(function(results) {
       var foundGraphite = false;
       var foundElastic = false;
       _.forEach(results, function(ds) {
@@ -168,7 +168,7 @@ class Ns1ConfigCtrl {
           access: 'direct',
           jsonData: {}
         };
-        promises.push(self.backendSrv.post('/api/datasources', graphite));
+        promises.push(self.backendSrv.post('api/datasources', graphite));
       }
       if (!foundElastic) {
         // create datasource.
@@ -184,7 +184,7 @@ class Ns1ConfigCtrl {
             timeField: "timestamp"
           }
         };
-        promises.push(self.backendSrv.post('/api/datasources', elastic));
+        promises.push(self.backendSrv.post('api/datasources', elastic));
       }
       return Promise.all(promises);
     });

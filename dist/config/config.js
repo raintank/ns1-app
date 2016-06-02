@@ -148,7 +148,7 @@ System.register(["./config.html!text"], function (_export, _context) {
                 "enabled": true
               };
 
-              var p = self.backendSrv.post("/api/plugin-proxy/raintank-ns1-app/tasks", task);
+              var p = self.backendSrv.post("api/plugin-proxy/raintank-ns1-app/tasks", task);
               p.then(function (resp) {
                 _this2.task = resp.body;
                 self.taskStatus = "Task created.";
@@ -160,7 +160,7 @@ System.register(["./config.html!text"], function (_export, _context) {
           key: "getTask",
           value: function getTask(taskName) {
             var self = this;
-            return this.backendSrv.get("/api/plugin-proxy/raintank-ns1-app/tasks", { metric: "/raintank/apps/ns1/*", name: taskName }).then(function (resp) {
+            return this.backendSrv.get("api/plugin-proxy/raintank-ns1-app/tasks", { metric: "/raintank/apps/ns1/*", name: taskName }).then(function (resp) {
               //console.log(resp);
               if (resp.body.length > 0) {
                 self.task = resp.body[0];
@@ -180,7 +180,7 @@ System.register(["./config.html!text"], function (_export, _context) {
               console.log("unknown task name.");
               return;
             }
-            return this.backendSrv.delete("/api/plugin-proxy/raintank-ns1-app/tasks/" + this.task.id).then(function (resp) {
+            return this.backendSrv.delete("api/plugin-proxy/raintank-ns1-app/tasks/" + this.task.id).then(function (resp) {
               _this3.task = {};
               _this3.taskStatus = "Task not found.";
             });
@@ -197,7 +197,7 @@ System.register(["./config.html!text"], function (_export, _context) {
           value: function initDatasource() {
             var self = this;
             //check for existing datasource.
-            return self.backendSrv.get('/api/datasources').then(function (results) {
+            return self.backendSrv.get('api/datasources').then(function (results) {
               var foundGraphite = false;
               var foundElastic = false;
               _.forEach(results, function (ds) {
@@ -221,7 +221,7 @@ System.register(["./config.html!text"], function (_export, _context) {
                   access: 'direct',
                   jsonData: {}
                 };
-                promises.push(self.backendSrv.post('/api/datasources', graphite));
+                promises.push(self.backendSrv.post('api/datasources', graphite));
               }
               if (!foundElastic) {
                 // create datasource.
@@ -237,7 +237,7 @@ System.register(["./config.html!text"], function (_export, _context) {
                     timeField: "timestamp"
                   }
                 };
-                promises.push(self.backendSrv.post('/api/datasources', elastic));
+                promises.push(self.backendSrv.post('api/datasources', elastic));
               }
               return Promise.all(promises);
             });
