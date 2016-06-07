@@ -113,7 +113,7 @@ System.register(["./config.html!text"], function (_export, _context) {
         }, {
           key: "getCustomerId",
           value: function getCustomerId() {
-            return this.backendSrv.get("api/plugin-proxy/raintank-ns1-app/ns1/account/settings");
+            return this.backendSrv.get("api/plugin-proxy/ns1-app/ns1/account/settings");
           }
         }, {
           key: "taskName",
@@ -143,12 +143,12 @@ System.register(["./config.html!text"], function (_export, _context) {
                     "ns1_key": ns1Token
                   }
                 },
-                "interval": 60,
+                "interval": 300,
                 "route": { "type": "any" },
                 "enabled": true
               };
 
-              var p = self.backendSrv.post("api/plugin-proxy/raintank-ns1-app/tasks", task);
+              var p = self.backendSrv.post("api/plugin-proxy/ns1-app/tasks", task);
               p.then(function (resp) {
                 _this2.task = resp.body;
                 self.taskStatus = "Task created.";
@@ -160,7 +160,7 @@ System.register(["./config.html!text"], function (_export, _context) {
           key: "getTask",
           value: function getTask(taskName) {
             var self = this;
-            return this.backendSrv.get("api/plugin-proxy/raintank-ns1-app/tasks", { metric: "/raintank/apps/ns1/*", name: taskName }).then(function (resp) {
+            return this.backendSrv.get("api/plugin-proxy/ns1-app/tasks", { metric: "/raintank/apps/ns1/*", name: taskName }).then(function (resp) {
               //console.log(resp);
               if (resp.body.length > 0) {
                 self.task = resp.body[0];
@@ -180,7 +180,7 @@ System.register(["./config.html!text"], function (_export, _context) {
               console.log("unknown task name.");
               return;
             }
-            return this.backendSrv.delete("api/plugin-proxy/raintank-ns1-app/tasks/" + this.task.id).then(function (resp) {
+            return this.backendSrv.delete("api/plugin-proxy/ns1-app/tasks/" + this.task.id).then(function (resp) {
               _this3.task = {};
               _this3.taskStatus = "Task not found.";
             });
@@ -217,7 +217,7 @@ System.register(["./config.html!text"], function (_export, _context) {
                 var graphite = {
                   name: 'raintank',
                   type: 'graphite',
-                  url: 'api/plugin-proxy/raintank-ns1-app/graphite',
+                  url: 'api/plugin-proxy/ns1-app/graphite',
                   access: 'direct',
                   jsonData: {}
                 };
@@ -228,7 +228,7 @@ System.register(["./config.html!text"], function (_export, _context) {
                 var elastic = {
                   name: 'raintankEvents',
                   type: 'elasticsearch',
-                  url: 'api/plugin-proxy/raintank-ns1-app/elasticsearch',
+                  url: 'api/plugin-proxy/ns1-app/elasticsearch',
                   access: 'direct',
                   database: '[events-]YYYY-MM-DD',
                   jsonData: {

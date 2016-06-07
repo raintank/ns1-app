@@ -72,7 +72,7 @@ class Ns1ConfigCtrl {
   }
 
   getCustomerId() {
-    return this.backendSrv.get("api/plugin-proxy/raintank-ns1-app/ns1/account/settings");
+    return this.backendSrv.get("api/plugin-proxy/ns1-app/ns1/account/settings");
   }
 
   taskName(customerid) {
@@ -98,12 +98,12 @@ class Ns1ConfigCtrl {
             "ns1_key": ns1Token
           }
         },
-        "interval": 60,
+        "interval": 300,
         "route": { "type": "any"},
         "enabled": true
       };
 
-      var p = self.backendSrv.post("api/plugin-proxy/raintank-ns1-app/tasks", task)
+      var p = self.backendSrv.post("api/plugin-proxy/ns1-app/tasks", task)
       p.then((resp) => {
         this.task = resp.body;
         self.taskStatus = "Task created.";
@@ -114,7 +114,7 @@ class Ns1ConfigCtrl {
 
   getTask(taskName) {
     var self = this;
-    return this.backendSrv.get("api/plugin-proxy/raintank-ns1-app/tasks", {metric: "/raintank/apps/ns1/*", name: taskName})
+    return this.backendSrv.get("api/plugin-proxy/ns1-app/tasks", {metric: "/raintank/apps/ns1/*", name: taskName})
     .then((resp) => {
       //console.log(resp);
       if (resp.body.length > 0 ){
@@ -132,7 +132,7 @@ class Ns1ConfigCtrl {
       console.log("unknown task name.");
       return;
     }
-    return this.backendSrv.delete("api/plugin-proxy/raintank-ns1-app/tasks/"+this.task.id).then((resp) => {
+    return this.backendSrv.delete("api/plugin-proxy/ns1-app/tasks/"+this.task.id).then((resp) => {
       this.task = {};
       this.taskStatus = "Task not found.";
     });
@@ -164,7 +164,7 @@ class Ns1ConfigCtrl {
         var graphite = {
           name: 'raintank',
           type: 'graphite',
-          url: 'api/plugin-proxy/raintank-ns1-app/graphite',
+          url: 'api/plugin-proxy/ns1-app/graphite',
           access: 'direct',
           jsonData: {}
         };
@@ -175,7 +175,7 @@ class Ns1ConfigCtrl {
         var elastic = {
           name: 'raintankEvents',
           type: 'elasticsearch',
-          url: 'api/plugin-proxy/raintank-ns1-app/elasticsearch',
+          url: 'api/plugin-proxy/ns1-app/elasticsearch',
           access: 'direct',
           database: '[events-]YYYY-MM-DD',
           jsonData: {
