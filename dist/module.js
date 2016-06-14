@@ -1,12 +1,14 @@
 'use strict';
 
-System.register(['./config/config.js', './components/snaptask/snaptask_list', 'app/plugins/sdk'], function (_export, _context) {
-  var ConfigCtrl, SnapTaskListCtrl, loadPluginCss;
+System.register(['./config/config.js', './components/snaptask/snaptask_list', './components/snaptask/snaptask_add', 'app/plugins/sdk'], function (_export, _context) {
+  var ConfigCtrl, SnapTaskListCtrl, SnapTaskAddCtrl, loadPluginCss;
   return {
     setters: [function (_configConfigJs) {
       ConfigCtrl = _configConfigJs.ConfigCtrl;
     }, function (_componentsSnaptaskSnaptask_list) {
       SnapTaskListCtrl = _componentsSnaptaskSnaptask_list.SnapTaskListCtrl;
+    }, function (_componentsSnaptaskSnaptask_add) {
+      SnapTaskAddCtrl = _componentsSnaptaskSnaptask_add.SnapTaskAddCtrl;
     }, function (_appPluginsSdk) {
       loadPluginCss = _appPluginsSdk.loadPluginCss;
     }],
@@ -20,6 +22,8 @@ System.register(['./config/config.js', './components/snaptask/snaptask_list', 'a
       _export('ConfigCtrl', ConfigCtrl);
 
       _export('SnapTaskListCtrl', SnapTaskListCtrl);
+
+      _export('SnapTaskAddCtrl', SnapTaskAddCtrl);
     }
   };
 });

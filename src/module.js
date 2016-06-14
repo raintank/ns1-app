@@ -1,5 +1,6 @@
 import {ConfigCtrl} from './config/config.js';
 import {SnapTaskListCtrl} from './components/snaptask/snaptask_list';
+import {SnapTaskAddCtrl} from './components/snaptask/snaptask_add';
 import {loadPluginCss} from 'app/plugins/sdk';
 
 loadPluginCss({
@@ -9,5 +10,6 @@ loadPluginCss({
 
 export {
 	ConfigCtrl,
-	SnapTaskListCtrl
+	SnapTaskListCtrl,
+  SnapTaskAddCtrl
 };

@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h1>Add a New NS1 Task</h1>
+</div>
+<div class="row">
+  <div class="col-md-10">
+    <p>A task polls your NS1 metrics and stores it in the Grafana.net time series hosted metrics store, making metrics available on any dashboard.</p>
+  </div>
+</div>
+
+<form name="addTaskForm">
+  <div class="gf-form-group">
+    <div class="gf-form">
+      <label class="gf-form-label width-11">NS1 Type</label>
+      <div class="gf-form-select-wrapper">
+        <select class="gf-form-input gf-size-auto" ng-model="ctrl.device.type">
+          <option value="zone">Zone</option>
+          <option value="monitor">Monitor</option>
+        </select>
+      </div>
+    </div>
+		<div class="gf-form-button-row">
+			<button type="submit" class="btn btn-success" ng-click="ctrl.addDevice()">Get Zones</button>
+  		<a class="btn btn-link" ng-click="ctrl.cancel();">Cancel</a>
+		</div>
+  </div>
+</form>

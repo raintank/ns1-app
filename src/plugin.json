@@ -93,7 +93,8 @@
       "addToNav": true,
       "defaultNav": true
     },
-    { "type": "page", "name": "Snap Tasks", "component": "SnapTaskListCtrl", "role": "Viewer",  "addToNav": true}
+    { "type": "page", "name": "Snap Tasks", "component": "SnapTaskListCtrl", "role": "Viewer",  "addToNav": true},
+    { "type": "page", "name": "Add Task", "component": "SnapTaskAddCtrl", "role": "Viewer",  "addToNav": true}
   ],
 
   "dependencies": {
