@@ -1,0 +1,11 @@
+.ns1-card-item-header-action {
+  margin-top: 10px; }
+
+.ns1-card-item-action {
+  margin-right: 5px;
+  display: inline; }
+
+.ns1-card-item-action:last-child {
+  margin-right: 0px; }
+
+/*# sourceMappingURL=ns1.dark.css.map */

@@ -1,0 +1,11 @@
+{
+	"version": 3,
+	"file": "ns1.light.css",
+	"sources": [
+		"../../src/sass/ns1.light.scss",
+		"../../../../../public/sass/_variables.light.scss",
+		"../../src/sass/ns1.scss"
+	],
+	"mappings": "AEAA,AAAA,4BAA4B,CAAC;EAC3B,UAAU,EAAE,IAAK,GAClB;;AAED,AAAA,qBAAqB,CAAC;EACpB,YAAY,EAAE,GAAI;EAClB,OAAO,EAAE,MAAO,GACjB;;AAED,AAAqB,qBAAA,AAAA,WAAW,CAAC;EAC/B,YAAY,EAAE,GAAI,GACnB",
+	"names": []
+}
