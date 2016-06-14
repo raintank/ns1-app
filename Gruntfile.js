@@ -13,25 +13,19 @@ module.exports = function(grunt) {
       src_to_dist: {
         cwd: 'src',
         expand: true,
-        src: ['**/*', '!**/*.js'],
+        src: ['**/*', '!**/*.js', '!**/*.scss'],
         dest: 'dist'
-      },
-      img_to_dist: {
-        cwd: 'src',
-        expand: true,
-        src: ['img/*'],
-        dest: 'dist/src/'
       },
       pluginDef: {
         expand: true,
-        src: ['plugin.json', 'README.md'],
+        src: ['README.md'],
         dest: 'dist',
       }
     },
 
     watch: {
       rebuild_all: {
-        files: ['src/**/*', 'plugin.json', 'README.md'],
+        files: ['src/**/*', 'README.md'],
         tasks: ['default'],
         options: {spawn: false}
       },
@@ -47,13 +41,55 @@ module.exports = function(grunt) {
         files: [{
           cwd: 'src',
           expand: true,
-          src: ['**/*.js'],
+          src: ['**/*.js', '!src/directives/*.js', '!src/filters/*.js'],
           dest: 'dist',
           ext:'.js'
         }]
       },
+    },
+
+    jshint: {
+      source: {
+        files: {
+          src: ['src/**/*.js'],
+        }
+      },
+      options: {
+        jshintrc: true,
+        reporter: require('jshint-stylish'),
+        ignores: [
+          'node_modules/*',
+          'dist/*',
+        ]
+      }
+    },
+    jscs: {
+      src: ['src/**/*.js'],
+      options: {
+        config: ".jscs.json",
+      },
+    },
+
+    sass: {
+      options: {
+        sourceMap: true
+      },
+      dist: {
+        files: {
+          "dist/css/ns1.dark.css": "src/sass/ns1.dark.scss",
+          "dist/css/ns1.light.css": "src/sass/ns1.light.scss",
+        }
+      }
     }
   });
 
-  grunt.registerTask('default', ['clean', 'copy:src_to_dist', 'copy:pluginDef', 'babel']);
+  grunt.registerTask('default', [
+    'clean',
+    'sass',
+    'copy:src_to_dist',
+    'copy:pluginDef',
+    'babel',
+    // 'jshint',
+    // 'jscs',
+    ]);
 };
