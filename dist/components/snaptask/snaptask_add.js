@@ -114,10 +114,10 @@ System.register(["lodash"], function (_export, _context) {
             var promises = [];
             _.forEach(this.queuedTask, function (task) {
               if (task.type === "zone") {
-                promises.push(self.addZoneTask(task));
+                promises.push(self.addZoneTask(task.zone));
               }
               if (task.type === "monitoring") {
-                promises.push(self.addMonitorTask(task));
+                promises.push(self.addMonitorTask(task.jobId, task.name));
               }
             });
 

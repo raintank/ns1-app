@@ -11,6 +11,11 @@ System.register([], function (_export, _context) {
     }
   }
 
+  function slugify(str) {
+    var slug = str.replace("@", "at").replace("&", "and").replace(".", "_").replace("/\W+/", "");
+    return slug;
+  }
+
   return {
     setters: [],
     execute: function () {
@@ -57,8 +62,10 @@ System.register([], function (_export, _context) {
         }, {
           key: "removeTask",
           value: function removeTask(task) {
+            var self = this;
             return this.backendSrv.delete("api/plugin-proxy/ns1-app/tasks/" + task.id).then(function (resp) {
               //remove task from taskList
+              self.getTasks();
             });
           }
         }, {
@@ -72,6 +79,36 @@ System.register([], function (_export, _context) {
           value: function startTask(task) {
             task.enabled = true;
             return this.backendSrv.put("api/plugin-proxy/ns1-app/tasks", task);
+          }
+        }, {
+          key: "getType",
+          value: function getType(task) {
+            if (task.name.substring(0, 14) === "ns1-monitoring") {
+              return "monitoringJob";
+            } else if (task.name.substring(0, 8) === "ns1-zone") {
+              return "zone";
+            }
+            return "";
+          }
+        }, {
+          key: "taskDashboard",
+          value: function taskDashboard(task) {
+            var type = this.getType(task);
+            if (type === "monitoringJob") {
+              return "dashboard/db/ns1-monitors?&var-monitor=" + slugify(task.config['/raintank/apps/ns1'].jobName);
+            } else if (type == "zone") {
+              return "dashboard/db/ns1-zones?&var-zone=" + slugify(task.config['/raintank/apps/ns1'].zone);
+            }
+          }
+        }, {
+          key: "taskLabel",
+          value: function taskLabel(task) {
+            var type = this.getType(task);
+            if (type === "monitoringJob") {
+              return "Monitoring Job: " + task.config['/raintank/apps/ns1'].jobName;
+            } else if (type == "zone") {
+              return "Zone: " + task.config['/raintank/apps/ns1'].zone;
+            }
           }
         }]);
 

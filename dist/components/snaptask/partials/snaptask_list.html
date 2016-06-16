@@ -70,7 +70,7 @@
               </a>
             </div>
             <div class="ns1-card-item-action">
-              <a class="btn btn-danger btn-mini">
+              <a class="btn btn-danger btn-mini" ng-click="ctrl.removeTask(task)">
                 <i class="fa fa-remove"></i>
               </a>
             </div>
@@ -78,7 +78,7 @@
           <div class="card-item-body">
             <div class="card-item-details">
               <div class="card-item-name">
-                <a href="dashboard/db/ns1-zones?&var-endpoint={{task.config['/raintank/apps/ns1'].zone | ns1Slugify}}" ng-click="$event.stopPropagation();">
+                <a href="{{ctrl.taskDasboard(task)}}" ng-click="$event.stopPropagation();">
                   {{ctrl.taskLabel(task)}}
                 </a>
               </div>
