@@ -11,19 +11,11 @@
 	</div>
 	<div class="gf-form">
 		<label class="gf-form-label width-10">NS1 Api Key</label>
-		<!-- Hidden input to stop chrome from autofilling -->
-		<input style="display:none;" type="password" name="ns1_token" />
-		<input type="password" class="gf-form-input max-width-20" ng-model="ctrl.appModel.secureJsonData.ns1_token" placeholder="NS1 api token" ng-show="!ctrl.appModel.jsonData.ns1TokenSet" />
-		<input type="text" class="gf-form-input max-width-20" disabled="disabled" value="saved" ng-show="ctrl.appModel.jsonData.ns1TokenSet" />
-		<a href="#" ng-click="ctrl.resetNs1Token()" ng-if="ctrl.appModel.jsonData.ns1TokenSet">reset</a>
+		<input type="password" class="gf-form-input max-width-20" ng-model="ctrl.appModel.jsonData.ns1_token" placeholder="NS1 api token" />
 	</div>
 
 	<div ng-show="ctrl.error">
 		{{ctrl.error}}
-	</div>
-	<div ng-show="ctrl.appModel.enabled">
-		{{ctrl.taskStatus}}:
-		<a href=# ng-click="ctrl.stopTask()" ng-if="ctrl.task.id">Delete Task</a>
 	</div>
 </div>
 

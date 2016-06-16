@@ -7,12 +7,12 @@
 
   "routes": [
     {
-      "path": "ns1/account/settings",
+      "path": "ns1/*",
       "method": "GET",
-      "url": "https://api.nsone.net/v1/account/settings",
+      "url": "https://api.nsone.net/v1",
       "reqSignedIn": true,
       "headers": [
-        {"name": "X-NSONE-KEY", "content": "{{.SecureJsonData.ns1_token}}"}
+        {"name": "X-NSONE-KEY", "content": "{{.JsonData.ns1_token}}"}
       ]
     },
     {
@@ -93,7 +93,7 @@
       "addToNav": true,
       "defaultNav": true
     },
-    { "type": "page", "name": "Snap Tasks", "component": "SnapTaskListCtrl", "role": "Viewer",  "addToNav": true},
+    { "type": "page", "name": "List Tasks", "component": "SnapTaskListCtrl", "role": "Viewer",  "addToNav": true},
     { "type": "page", "name": "Add Task", "component": "SnapTaskAddCtrl", "role": "Viewer",  "addToNav": true}
   ],
 
