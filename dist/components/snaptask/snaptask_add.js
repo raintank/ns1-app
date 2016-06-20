@@ -65,7 +65,7 @@ System.register(["lodash"], function (_export, _context) {
           value: function getConfig() {
             var self = this;
             this.backendSrv.get("api/plugins/ns1-app/settings").then(function (resp) {
-              self.ns1Token = resp.jsonData.ns1_token;
+              self.ns1Token = resp.jsonData.ns1Token;
               if (self.ns1Token) {
                 self.pageReady = true;
               } else {
@@ -130,12 +130,13 @@ System.register(["lodash"], function (_export, _context) {
         }, {
           key: "addZoneTask",
           value: function addZoneTask(zone) {
+
             var task = {
               "name": "ns1-zone-" + zone,
               "metrics": { "/raintank/apps/ns1/zones/*": 0 },
               "config": {
                 "/raintank/apps/ns1": {
-                  "ns1_key": self.ns1Token,
+                  "ns1_key": this.ns1Token,
                   "zone": zone
                 }
               },
@@ -155,7 +156,7 @@ System.register(["lodash"], function (_export, _context) {
               "metrics": { "/raintank/apps/ns1/monitoring/*": 0 },
               "config": {
                 "/raintank/apps/ns1": {
-                  "ns1_key": self.ns1Token,
+                  "ns1_key": this.ns1Token,
                   "jobId": jobId,
                   "jobName": jobName
                 }

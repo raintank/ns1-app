@@ -26,7 +26,7 @@ class SnapTaskAddCtrl {
   getConfig() {
     var self = this;
     this.backendSrv.get("api/plugins/ns1-app/settings").then((resp) => {
-      self.ns1Token = resp.jsonData.ns1_token;
+      self.ns1Token = resp.jsonData.ns1Token;
       if (self.ns1Token) {
         self.pageReady = true;
       } else {
@@ -84,13 +84,14 @@ class SnapTaskAddCtrl {
     });
   }
 
-  addZoneTask(zone) {    
+  addZoneTask(zone) {
+
     var task = {
       "name": "ns1-zone-"+zone,
       "metrics": {"/raintank/apps/ns1/zones/*":0},
       "config": {
         "/raintank/apps/ns1": {
-          "ns1_key": self.ns1Token,
+          "ns1_key": this.ns1Token,
           "zone": zone
         }
       },
@@ -108,7 +109,7 @@ class SnapTaskAddCtrl {
       "metrics": {"/raintank/apps/ns1/monitoring/*":0},
       "config": {
         "/raintank/apps/ns1": {
-          "ns1_key": self.ns1Token,
+          "ns1_key": this.ns1Token,
           "jobId": jobId,
           "jobName": jobName,
         }
