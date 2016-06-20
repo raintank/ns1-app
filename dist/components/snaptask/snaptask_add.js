@@ -1,8 +1,6 @@
 "use strict";
 
 System.register(["lodash"], function (_export, _context) {
-  "use strict";
-
   var _, _createClass, SnapTaskAddCtrl;
 
   function _classCallCheck(instance, Constructor) {
@@ -41,6 +39,7 @@ System.register(["lodash"], function (_export, _context) {
           this.$location = $location;
           this.backendSrv = backendSrv;
           this.pageReady = true;
+          this.creatingTasks = false;
           this.error = null;
           this.zones = [];
           this.monitoringJobs = [];
@@ -111,6 +110,7 @@ System.register(["lodash"], function (_export, _context) {
           key: "create",
           value: function create() {
             var self = this;
+            self.creatingTasks = true;
             var promises = [];
             _.forEach(this.queuedTask, function (task) {
               if (task.type === "zone") {
@@ -121,7 +121,8 @@ System.register(["lodash"], function (_export, _context) {
               }
             });
 
-            Promise.all(promises).then(function () {
+            return Promise.all(promises).then(function () {
+              self.creatingTasks = false;
               self.$location.url("plugins/ns1-app/page/list-tasks");
             }, function (resp) {
               console.log("failed to add all tasks.", resp);

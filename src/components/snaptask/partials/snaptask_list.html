@@ -6,88 +6,57 @@
   </a>
 </div>
 
-<div ng-if="!ctrl.pageReady" class="rt-loading-message-container">
-  <div class="rt-loading-message-inside">
-    <img class="rt-loading-pulse" src="public/plugins/raintank-worldping-app/img/loading-pulse.svg" style="margin-bottom: 10px;">
-    <p class="rt-loading-msg-1">To infinity...and beyond.</p>
-    <p class="rt-loading-msg-2">This is taking longer than expected.</p>
-    <p class="rt-loading-msg-3">We apologize, something may be up. Please try refreshing first, and contact us if this continues to happen.</p>
+<div ng-if="!ctrl.pageReady">
+  <div style="text-align: center; padding-top: 90px; min-height: 220px; min-width: 400px;  margin: 0 auto;">
+		<p class="ns1-loading-msg-1">Checking for NS1 tasks.</p>
+		<p class="ns1-loading-msg-2">This is taking longer than expected.</p>
+		<p class="ns1-loading-msg-3">We apologize, something may be up. Please try refreshing first, and contact us if this continues to happen.</p>
   </div>
 </div>
 
-<div ng-if="ctrl.pageReady">
-  <div ng-if="ctrl.tasks.length === 0" class="wp-empty-endpoint-list">
+<div class="ns1-list-delay" ng-if="ctrl.pageReady">
+  <div ng-if="ctrl.tasks.length === 0">
     <div style="text-align: center; padding-top: 90px; min-height: 220px; min-width: 400px;  margin: 0 auto;">
-      <i ng-class="icon" class="icon-gf icon-gf-endpoint no-endpoints"></i>
-      <p ng-if="ctrl.isOrgEditor">Looks like you don’t have any zones connected yet.<br>
+      <p ng-if="ctrl.isOrgEditor">Looks like you don’t have any zones or monitors connected yet.<br>
         <a class="highlight-word" href="plugins/ns1-app/page/add-task">Add a new task</a>
       </p>
-      <p ng-if="!ctrl.isOrgEditor">Your org does not have any endpoints.<br>In the meantime,
-        <a class="highlight-word" href="dashboard/db/worldping-endpoint-summary?var-endpoint=~google_com_demo">view some live demo data.</a>
+      <p ng-if="!ctrl.isOrgEditor">Looks like you don’t have any zones or monitors connected yet.<br>
+        <a class="highlight-word" href="plugins/ns1-app/page/add-task">Add a new task</a>
       </p>
-    </div>
-    <a href="#" ng-click="ctrl.showEndpointDesc = !ctrl.showEndpointDesc">
-      <span ng-hide="ctrl.showEndpointDesc">What's an endpoint?</span>
-      <span><i class="fa fa-caret-right rt-box-accordian-control" ng-hide="ctrl.showEndpointDesc"></i></span>
-      <span ng-show="ctrl.showEndpointDesc">What's an endpoint?</span>
-      <span><i class="fa fa-caret-down" ng-show="ctrl.showEndpointDesc"></i></span>
-    </a>
-    <div class="wp-app-endpointdesc-box" ng-class="{ 'wp-app-endpointdesc-open': ctrl.showEndpointDesc }">
-      <div class="rt-collapse-blurb-box">
-        <p class="rt-helper-blurb">In worldPing, an endpoint is anything you want to monitor.</p>
-        <p class="rt-helper-blurb">When you enter the fully qualified domain name of your endpoint, we will automatically detect what is available to monitor (eg. PING, HTTP, HTTPS) and suggest a customizable set of defaults unique to your endpoint.</p>
-      </div>
-    </div>
-  </div>
-
-  <div ng-if="ctrl.tasks.length > 0">
-    <div class="gf-form">
-      <span class="gf-form-label width-6">Filter by:</span>
-      <div class="gf-form-select-wrapper">
-        <select class="gf-form-input gf-size-auto" ng-model="ctrl.filter.type" ng-options="t for t in ['zone', 'monitoringJob']"><option value="">All Tasks</option></select>
-      </div>
-    </div>
-    <div class="rt-list-showing-header">
-      <div class="rt-list-status">
-        <span class="small">Showing {{(ctrl.tasks | filterByType:ctrl.filter.type).length}}</span>
-        <span class="small"> of <span class="rt-list-links" ng-click="ctrl.setTypeFilter('')">{{ctrl.tasks.length}} total</a></span>
-      </div>
     </div>
   </div>
 </div>
 
-  <section class="card-section card-list-layout-list">
-    <ol class="card-list" >
-      <li class="card-item-wrapper" ng-repeat="task in ctrl.tasks">
-        <div class="card-item pointer">
-          <div class="card-item-header ns1-card-item-header-action">
-            <div class="ns1-card-item-action">
-              <a class="btn btn-secondary btn-mini" bs-tooltip="'Stop task'" ng-click="ctrl.stopTask(task)" ng-show="task.enabled">
-                <i class="fa fa-stop"> </i> Stop task
-              </a>
-              <a class="btn btn-secondary btn-mini" bs-tooltip="'Start task'" ng-click="ctrl.startTask(task)" ng-hide="task.enabled">
-                <i class="fa fa-play"> </i> Start task
-              </a>
-            </div>
-            <div class="ns1-card-item-action">
-              <a class="btn btn-danger btn-mini" ng-click="ctrl.removeTask(task)">
-                <i class="fa fa-remove"></i>
-              </a>
-            </div>
+<section class="card-section card-list-layout-list" ng-if="ctrl.pageReady">
+  <ol class="card-list" >
+    <li class="card-item-wrapper" ng-repeat="task in ctrl.tasks">
+      <div class="card-item">
+        <div class="card-item-header ns1-card-item-header-action">
+          <div class="ns1-card-item-action">
+            <a class="btn btn-secondary btn-mini" bs-tooltip="'Stop task'" ng-click="ctrl.stopTask(task)" ng-show="task.enabled">
+              <i class="fa fa-stop"> </i> Stop task
+            </a>
+            <a class="btn btn-secondary btn-mini" bs-tooltip="'Start task'" ng-click="ctrl.startTask(task)" ng-hide="task.enabled">
+              <i class="fa fa-play"> </i> Start task
+            </a>
           </div>
-          <div class="card-item-body">
-            <div class="card-item-details">
-              <div class="card-item-name">
-                <a href="{{ctrl.taskDasboard(task)}}" ng-click="$event.stopPropagation();">
-                  {{ctrl.taskLabel(task)}}
-                </a>
-              </div>
-              <div class="card-item-sub-name">
-                <span class="card-item-sub-name--header">Zone: </span> Running Since {{task.updated}}
-              </div>
+          <div class="ns1-card-item-action">
+            <a class="btn btn-danger btn-mini" ng-click="ctrl.removeTask(task)">
+              <i class="fa fa-remove"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-item-body">
+          <div class="card-item-details">
+            <div class="card-item-name">
+              {{ctrl.taskLabel(task)}}
+            </div>
+            <div class="card-item-sub-name">
+              Running Since {{task.updated}}
             </div>
           </div>
         </div>
-      </li>
-    </ol>
-  </section>
+      </div>
+    </li>
+  </ol>
+</section>

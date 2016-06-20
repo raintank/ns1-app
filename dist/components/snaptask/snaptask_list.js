@@ -1,8 +1,6 @@
 "use strict";
 
 System.register([], function (_export, _context) {
-  "use strict";
-
   var _createClass, SnapTaskListCtrl;
 
   function _classCallCheck(instance, Constructor) {
@@ -42,7 +40,7 @@ System.register([], function (_export, _context) {
           _classCallCheck(this, SnapTaskListCtrl);
 
           this.backendSrv = backendSrv;
-          this.pageReady = true;
+          this.pageReady = false;
           this.tasks = [];
 
           this.getTasks();
@@ -53,10 +51,10 @@ System.register([], function (_export, _context) {
           value: function getTasks() {
             var self = this;
             return this.backendSrv.get("api/plugin-proxy/ns1-app/tasks", { metric: "/raintank/apps/ns1/*" }).then(function (resp) {
-              //console.log(resp);
               if (resp.body.length > 0) {
                 self.tasks = resp.body;
               }
+              self.pageReady = true;
             });
           }
         }, {
@@ -85,7 +83,8 @@ System.register([], function (_export, _context) {
           value: function getType(task) {
             if (task.name.substring(0, 14) === "ns1-monitoring") {
               return "monitoringJob";
-            } else if (task.name.substring(0, 8) === "ns1-zone") {
+            }
+            if (task.name.substring(0, 8) === "ns1-zone") {
               return "zone";
             }
             return "";

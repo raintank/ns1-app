@@ -1,5 +1,9 @@
-<h3 class="page-heading">NS1 Credentials</h3>
+<p ng-if="!ctrl.appModel.secureJsonData.gnet_token">worldPing requires both a Grafana.net and NS1 account.
 
+<div class="ns1-installation-number--group">
+	<span class="ns1-installation-number--h3">1</span><h3 class="page-heading ns1-installation-number--h3-lockup">Enter Grafana.net Credentials</h3>
+</div>
+<p><a class="highlight-word" href="//grafana.net/profile/api-keys" target="_blank">Generate a new Grafana.net API key</a> or <a class="highlight-word" href="//grafana.net/signup" target="_blank">sign up for free.</a></p>
 <div class="gf-form-group">
 	<div class="gf-form">
 		<label class="gf-form-label width-10">Grafana.Net</label>
@@ -9,6 +13,13 @@
 		<input type="text" class="gf-form-input max-width-20" disabled="disabled" value="saved" ng-show="ctrl.appModel.jsonData.gnetTokenSet" />
 		<a href="#" ng-click="ctrl.appModel.jsonData.gnetTokenSet=false" ng-if="ctrl.appModel.jsonData.gnetTokenSet">reset</a>
 	</div>
+</div>
+
+<div class="ns1-installation-number--group">
+	<span class="ns1-installation-number--h3">2</span><h3 class="page-heading ns1-installation-number--h3-lockup">Enter NS1 Credentials</h3>
+</div>
+<p><a class="highlight-word" href="https://my.nsone.net/v2/#/account/settings" target="_blank">Generate your NS1 API key</a> or <a class="highlight-word" href="https://ns1.com/signup?plan=startup" target="_blank">sign up for a free trial.</a></p>
+<div class="gf-form-group">
 	<div class="gf-form">
 		<label class="gf-form-label width-10">NS1 Api Key</label>
 		<input type="password" class="gf-form-input max-width-20" ng-model="ctrl.appModel.jsonData.ns1Token" placeholder="NS1 api token" />
@@ -18,4 +29,3 @@
 		{{ctrl.error}}
 	</div>
 </div>
-

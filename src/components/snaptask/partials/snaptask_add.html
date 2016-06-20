@@ -10,7 +10,7 @@
 <form name="addTaskForm" ng-show="ctrl.pageReady">
   <div class="gf-form-group">
     <div class="gf-form">
-      <label class="gf-form-label width-11">NS1 Type</label>
+      <label class="gf-form-label width-8">NS1 Type</label>
       <div class="gf-form-select-wrapper">
         <select class="gf-form-input gf-size-auto" ng-model="ctrl.taskType">
           <option value="zone">Zone</option>
@@ -19,12 +19,12 @@
       </div>
     </div>
     <div class="gf-form" ng-show="ctrl.taskType === 'zone'">
-      <label class="gf-form-label width-10">Zone</label>
+      <label class="gf-form-label width-8">Zone</label>
       <select type="text" class="gf-form-input max-width-20" ng-model="ctrl.newTask.zone" ng-options="item.zone as item.zone for item in ctrl.zones"/>
       <button type="submit" class="btn btn-success" ng-click="ctrl.addTask()">Add</button>
     </div>
      <div class="gf-form" ng-show="ctrl.taskType === 'monitor'">
-      <label class="gf-form-label width-10">Name</label>
+      <label class="gf-form-label width-8">Name</label>
       <select type="text" class="gf-form-input max-width-20" ng-model="ctrl.newTask.job" ng-options="item as item.name for item in ctrl.monitoringJobs"/>
       <button type="submit" class="btn btn-success" ng-click="ctrl.addTask()">Add</button>
     </div>
@@ -35,7 +35,8 @@
       </div>
     </div>
 		<div class="gf-form-button-row">
-			<button type="submit" class="btn btn-success" ng-click="ctrl.create()">Create</button>
+			<button ng-if="!ctrl.creatingTasks" type="submit" class="btn btn-success" ng-click="ctrl.create()">Create</button>
+      <button ng-if="ctrl.creatingTasks" disabled type="submit" class="btn btn-success"><i class="fa fa-spinner fa-spin"></i> Create</button>
   		<a class="btn btn-link" ng-click="ctrl.cancel();">Cancel</a>
 		</div>
   </div>

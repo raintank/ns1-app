@@ -5,6 +5,7 @@ class SnapTaskAddCtrl {
     this.$location = $location;
     this.backendSrv = backendSrv;
     this.pageReady = true;
+    this.creatingTasks = false;
     this.error = null;
     this.zones = [];
     this.monitoringJobs = [];
@@ -67,6 +68,7 @@ class SnapTaskAddCtrl {
 
   create() {
     var self = this;
+    self.creatingTasks = true;
     var promises = [];
     _.forEach(this.queuedTask, function(task) {
       if (task.type === "zone") {
@@ -77,7 +79,8 @@ class SnapTaskAddCtrl {
       }
     });
 
-    Promise.all(promises).then(()=>{
+    return Promise.all(promises).then(()=>{
+      self.creatingTasks = false;
       self.$location.url("plugins/ns1-app/page/list-tasks");
     }, (resp)=>{
       console.log("failed to add all tasks.", resp);
