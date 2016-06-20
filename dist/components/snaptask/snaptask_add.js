@@ -142,7 +142,7 @@ System.register(["lodash"], function (_export, _context) {
               },
               "interval": 300,
               "route": { "type": "any" },
-              "enabled": false
+              "enabled": true
             };
 
             return this.backendSrv.post("api/plugin-proxy/ns1-app/tasks", task);
@@ -163,7 +163,7 @@ System.register(["lodash"], function (_export, _context) {
               },
               "interval": 300,
               "route": { "type": "any" },
-              "enabled": false
+              "enabled": true
             };
 
             return this.backendSrv.post("api/plugin-proxy/ns1-app/tasks", task);

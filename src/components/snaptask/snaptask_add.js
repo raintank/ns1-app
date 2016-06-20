@@ -97,7 +97,7 @@ class SnapTaskAddCtrl {
       },
       "interval": 300,
       "route": { "type": "any"},
-      "enabled": false
+      "enabled": true
     };
 
     return this.backendSrv.post("api/plugin-proxy/ns1-app/tasks", task);
@@ -116,7 +116,7 @@ class SnapTaskAddCtrl {
       },
       "interval": 300,
       "route": { "type": "any"},
-      "enabled": false
+      "enabled": true
     };
 
     return this.backendSrv.post("api/plugin-proxy/ns1-app/tasks", task);
