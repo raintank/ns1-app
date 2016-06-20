@@ -2,7 +2,6 @@ import {ConfigCtrl} from './config/config.js';
 import {SnapTaskListCtrl} from './components/snaptask/snaptask_list';
 import {SnapTaskAddCtrl} from './components/snaptask/snaptask_add';
 import {loadPluginCss} from 'app/plugins/sdk';
-import './filters/slugify';
 import './directives/new_task';
 
 

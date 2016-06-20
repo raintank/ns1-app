@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['./config/config.js', './components/snaptask/snaptask_list', './components/snaptask/snaptask_add', 'app/plugins/sdk', './filters/slugify', './directives/new_task'], function (_export, _context) {
+System.register(['./config/config.js', './components/snaptask/snaptask_list', './components/snaptask/snaptask_add', 'app/plugins/sdk', './directives/new_task'], function (_export, _context) {
   "use strict";
 
   var ConfigCtrl, SnapTaskListCtrl, SnapTaskAddCtrl, loadPluginCss;
@@ -13,7 +13,7 @@ System.register(['./config/config.js', './components/snaptask/snaptask_list', '.
       SnapTaskAddCtrl = _componentsSnaptaskSnaptask_add.SnapTaskAddCtrl;
     }, function (_appPluginsSdk) {
       loadPluginCss = _appPluginsSdk.loadPluginCss;
-    }, function (_filtersSlugify) {}, function (_directivesNew_task) {}],
+    }, function (_directivesNew_task) {}],
     execute: function () {
 
       loadPluginCss({
