@@ -70,14 +70,13 @@
       {"name": "Project site", "url": "http://github.com/raintank/ns1-app"},
       {"name": "License & Terms", "url": "https://github.com/raintank/ns1-app/blob/master/LICENSE"}
     ],
+    "screenshots": [
+      {"name": "Dashboard: Zones", "path": "img/ns1-dashboard-monitors.png"},
+      {"name": "Dashboard: Monitors", "path": "img/ns1-dashboard-zones.png"}
+    ],
     "version": "0.0.5",
     "updated": "2016-06-21"
   },
-
-  "screenshots": [
-    {"name": "Dashboard: Zones", "path": "img/ns1-dashboard-monitors.png"},
-    {"name": "Dashboard: Monitors", "path": "/img/ns1-dashboard-zones.png"}
-  ],
 
   "includes": [
     {
