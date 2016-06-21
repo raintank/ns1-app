@@ -76,7 +76,7 @@
 
   "screenshots": [
     {"name": "Dashboard: Zones", "path": "img/ns1-dashboard-monitors.png"},
-    {"name": "Dashboard: Monitors", "path": "/img/ns1-dashboard-zones.png"}
+    {"name": "Dashboard: Monitors", "path": "img/ns1-dashboard-zones.png"}
   ],
 
   "includes": [
