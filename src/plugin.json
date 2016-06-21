@@ -7,12 +7,12 @@
 
   "routes": [
     {
-      "path": "ns1/account/settings",
+      "path": "ns1/*",
       "method": "GET",
-      "url": "https://api.nsone.net/v1/account/settings",
+      "url": "https://api.nsone.net/v1",
       "reqSignedIn": true,
       "headers": [
-        {"name": "X-NSONE-KEY", "content": "{{.SecureJsonData.ns1_token}}"}
+        {"name": "X-NSONE-KEY", "content": "{{.JsonData.ns1Token}}"}
       ]
     },
     {
@@ -70,13 +70,13 @@
       {"name": "Project site", "url": "http://github.com/raintank/ns1-app"},
       {"name": "License & Terms", "url": "https://github.com/raintank/ns1-app/blob/master/LICENSE"}
     ],
-    "version": "0.0.4",
-    "updated": "2016-06-08"
+    "version": "0.0.5",
+    "updated": "2016-06-21"
   },
 
   "screenshots": [
-    {"name": "Dashboard: Zones", "path": "src/img/ns1-dashboard-monitors.png"},
-    {"name": "Dashboard: Monitors", "path": "src/img/ns1-dashboard-zones.png"}
+    {"name": "Dashboard: Zones", "path": "img/ns1-dashboard-monitors.png"},
+    {"name": "Dashboard: Monitors", "path": "/img/ns1-dashboard-zones.png"}
   ],
 
   "includes": [
@@ -92,7 +92,9 @@
       "path": "dashboards/ns1-monitors.json",
       "addToNav": true,
       "defaultNav": true
-    }
+    },
+    { "type": "page", "name": "List Tasks", "component": "SnapTaskListCtrl", "role": "Viewer",  "addToNav": true},
+    { "type": "page", "name": "Add Task", "component": "SnapTaskAddCtrl", "role": "Viewer",  "addToNav": true}
   ],
 
   "dependencies": {

@@ -1,5 +1,5 @@
 {
-  "name": "raintank-ns1-app",
+  "name": "ns1-app",
   "private": true,
   "version": "1.0.0",
   "description": "",
@@ -35,7 +35,9 @@
     "babel-preset-es2015": "^6.5.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-jscs": "^2.8.0",
-    "lodash": "~4.0.0"
+    "grunt-cli": "^1.2.0",
+    "lodash": "~4.0.0",
+    "jshint-stylish": "~2.1.0"
   },
   "homepage": "https://github.com/raintank/ns1-app#readme"
 }

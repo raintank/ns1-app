@@ -1,0 +1,62 @@
+<div class="page-header">
+  <h1 class="rt-h1">NS1 Tasks</h1>
+  <a class="btn btn-success" href="plugins/ns1-app/page/add-task">
+    <i class="fa fa-plus"></i>
+    Add Task
+  </a>
+</div>
+
+<div ng-if="!ctrl.pageReady">
+  <div style="text-align: center; padding-top: 90px; min-height: 220px; min-width: 400px;  margin: 0 auto;">
+		<p class="ns1-loading-msg-1">Checking for NS1 tasks.</p>
+		<p class="ns1-loading-msg-2">This is taking longer than expected.</p>
+		<p class="ns1-loading-msg-3">We apologize, something may be up. Please try refreshing first, and contact us if this continues to happen.</p>
+  </div>
+</div>
+
+<div class="ns1-list-delay" ng-if="ctrl.pageReady">
+  <div ng-if="ctrl.tasks.length === 0">
+    <div style="text-align: center; padding-top: 90px; min-height: 220px; min-width: 400px;  margin: 0 auto;">
+      <p ng-if="ctrl.isOrgEditor">Looks like you don’t have any zones or monitors connected yet.<br>
+        <a class="highlight-word" href="plugins/ns1-app/page/add-task">Add a new task</a>
+      </p>
+      <p ng-if="!ctrl.isOrgEditor">Looks like you don’t have any zones or monitors connected yet.<br>
+        <a class="highlight-word" href="plugins/ns1-app/page/add-task">Add a new task</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<section class="card-section card-list-layout-list" ng-if="ctrl.pageReady">
+  <ol class="card-list" >
+    <li class="card-item-wrapper" ng-repeat="task in ctrl.tasks">
+      <div class="card-item">
+        <div class="card-item-header ns1-card-item-header-action">
+          <div class="ns1-card-item-action">
+            <a class="btn btn-secondary btn-mini" bs-tooltip="'Stop task'" ng-click="ctrl.stopTask(task)" ng-show="task.enabled">
+              <i class="fa fa-stop"> </i> Stop task
+            </a>
+            <a class="btn btn-secondary btn-mini" bs-tooltip="'Start task'" ng-click="ctrl.startTask(task)" ng-hide="task.enabled">
+              <i class="fa fa-play"> </i> Start task
+            </a>
+          </div>
+          <div class="ns1-card-item-action">
+            <a class="btn btn-danger btn-mini" ng-click="ctrl.removeTask(task)">
+              <i class="fa fa-remove"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-item-body">
+          <div class="card-item-details">
+            <div class="card-item-name">
+              {{ctrl.taskLabel(task)}}
+            </div>
+            <div class="card-item-sub-name">
+              Running Since {{task.updated}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ol>
+</section>
