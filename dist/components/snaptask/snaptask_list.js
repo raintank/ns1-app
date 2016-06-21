@@ -72,14 +72,26 @@ System.register([], function (_export, _context) {
         }, {
           key: "stopTask",
           value: function stopTask(task) {
+            var self = this;
             task.enabled = false;
-            return this.backendSrv.put("api/plugin-proxy/ns1-app/tasks", task);
+            return this.backendSrv.put("api/plugin-proxy/ns1-app/tasks", task).then(function (resp) {
+              if (resp.meta.code !== 200) {
+                self.alertSrv.set("failed to stop task", resp, 'error', 10000);
+                self.getTasks();
+              }
+            });
           }
         }, {
           key: "startTask",
           value: function startTask(task) {
+            var self = this;
             task.enabled = true;
-            return this.backendSrv.put("api/plugin-proxy/ns1-app/tasks", task);
+            return this.backendSrv.put("api/plugin-proxy/ns1-app/tasks", task).then(function (resp) {
+              if (resp.meta.code !== 200) {
+                self.alertSrv.set("failed to start task", resp, 'error', 10000);
+                self.getTasks();
+              }
+            });
           }
         }, {
           key: "getType",

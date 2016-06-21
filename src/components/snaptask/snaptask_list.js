@@ -34,12 +34,24 @@ class SnapTaskListCtrl {
   }
 
   stopTask(task) {
+    var self = this;
   	task.enabled = false;
-    return this.backendSrv.put("api/plugin-proxy/ns1-app/tasks", task);
+    return this.backendSrv.put("api/plugin-proxy/ns1-app/tasks", task).then((resp) => {
+      if (resp.meta.code !== 200) {
+        self.alertSrv.set("failed to stop task", resp, 'error', 10000);
+        self.getTasks();
+      }
+    });
   }
   startTask(task) {
+    var self = this;
   	task.enabled = true;
-    return this.backendSrv.put("api/plugin-proxy/ns1-app/tasks", task);
+    return this.backendSrv.put("api/plugin-proxy/ns1-app/tasks", task).then((resp) => {
+      if (resp.meta.code !== 200) {
+        self.alertSrv.set("failed to start task", resp, 'error', 10000);
+        self.getTasks();
+      }
+    });
   }
 
   getType(task) {
