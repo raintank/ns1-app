@@ -70,8 +70,8 @@
       {"name": "Project site", "url": "http://github.com/raintank/ns1-app"},
       {"name": "License & Terms", "url": "https://github.com/raintank/ns1-app/blob/master/LICENSE"}
     ],
-    "version": "0.0.4",
-    "updated": "2016-06-08"
+    "version": "0.0.5",
+    "updated": "2016-06-21"
   },
 
   "screenshots": [
