@@ -5,8 +5,9 @@ function slugify(str) {
 }
 
 class SnapTaskListCtrl {
-  constructor($scope, $injector, backendSrv) {
+  constructor($scope, $injector, backendSrv, alertSrv) {
   	this.backendSrv = backendSrv;
+    this.alertSrv = alertSrv;
     this.pageReady = false;
     this.tasks = [];
 
@@ -17,9 +18,7 @@ class SnapTaskListCtrl {
     var self = this;
     return this.backendSrv.get("api/plugin-proxy/ns1-app/tasks", {metric: "/raintank/apps/ns1/*"})
     .then((resp) => {
-      if (resp.body.length > 0 ){
-        self.tasks = resp.body;
-      }
+      self.tasks = resp.body;
 			self.pageReady = true;
     });
   }
@@ -27,7 +26,9 @@ class SnapTaskListCtrl {
   removeTask(task) {
   	var self = this;
     return this.backendSrv.delete("api/plugin-proxy/ns1-app/tasks/"+task.id).then((resp) => {
-      //remove task from taskList
+      if (resp.meta.code !== 200) {
+        self.alertSrv.set("failed to delete task", resp, 'error', 10000);
+      }
       self.getTasks();
     });
   }

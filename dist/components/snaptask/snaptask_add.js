@@ -1,6 +1,8 @@
 "use strict";
 
 System.register(["lodash"], function (_export, _context) {
+  "use strict";
+
   var _, _createClass, SnapTaskAddCtrl;
 
   function _classCallCheck(instance, Constructor) {
@@ -33,11 +35,14 @@ System.register(["lodash"], function (_export, _context) {
       }();
 
       _export("SnapTaskAddCtrl", SnapTaskAddCtrl = function () {
-        function SnapTaskAddCtrl($scope, $injector, $location, backendSrv) {
+        function SnapTaskAddCtrl($scope, $injector, $q, $location, backendSrv, alertSrv) {
           _classCallCheck(this, SnapTaskAddCtrl);
 
+          this.$q = $q;
           this.$location = $location;
           this.backendSrv = backendSrv;
+          this.alertSrv = alertSrv;
+          this.$scope = $scope;
           this.pageReady = true;
           this.creatingTasks = false;
           this.error = null;
@@ -110,7 +115,7 @@ System.register(["lodash"], function (_export, _context) {
           key: "create",
           value: function create() {
             var self = this;
-            self.creatingTasks = true;
+            this.creatingTasks = true;
             var promises = [];
             _.forEach(this.queuedTask, function (task) {
               if (task.type === "zone") {
@@ -121,16 +126,21 @@ System.register(["lodash"], function (_export, _context) {
               }
             });
 
-            return Promise.all(promises).then(function () {
+            this.$q.all(promises).then(function () {
+              console.log("finished creating tasks.");
+              self.queuedTask = [];
               self.creatingTasks = false;
-              self.$location.url("plugins/ns1-app/page/list-tasks");
+              self.$location.path("plugins/ns1-app/page/list-tasks");
             }, function (resp) {
               console.log("failed to add all tasks.", resp);
+              self.creatingTasks = false;
+              self.alertSrv.set("failed to create task", resp, 'error', 10000);
             });
           }
         }, {
           key: "addZoneTask",
           value: function addZoneTask(zone) {
+            var _this = this;
 
             var task = {
               "name": "ns1-zone-" + zone,
@@ -146,11 +156,18 @@ System.register(["lodash"], function (_export, _context) {
               "enabled": true
             };
 
-            return this.backendSrv.post("api/plugin-proxy/ns1-app/tasks", task);
+            return this.backendSrv.post("api/plugin-proxy/ns1-app/tasks", task).then(function (resp) {
+              if (resp.meta.code !== 200) {
+                console.log("request failed.", resp.meta.message);
+                return _this.$q.reject(resp.meta.message);
+              }
+            });
           }
         }, {
           key: "addMonitorTask",
           value: function addMonitorTask(jobId, jobName) {
+            var _this2 = this;
+
             var taskName = "ns1-monitoring-" + jobId;
             var task = {
               "name": "ns1-monitoring-" + jobId,
@@ -167,7 +184,12 @@ System.register(["lodash"], function (_export, _context) {
               "enabled": true
             };
 
-            return this.backendSrv.post("api/plugin-proxy/ns1-app/tasks", task);
+            return this.backendSrv.post("api/plugin-proxy/ns1-app/tasks", task).then(function (resp) {
+              if (resp.meta.code !== 200) {
+                console.log("request failed.", resp.meta.message);
+                return _this2.$q.reject(resp.meta.message);
+              }
+            });
           }
         }]);
 
