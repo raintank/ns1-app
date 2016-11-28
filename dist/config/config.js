@@ -1,8 +1,6 @@
 "use strict";
 
 System.register(["./config.html!text"], function (_export, _context) {
-  "use strict";
-
   var configTemplate, _createClass, Ns1ConfigCtrl;
 
   function _classCallCheck(instance, Constructor) {
