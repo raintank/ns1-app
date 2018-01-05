@@ -1,6 +1,8 @@
 'use strict';
 
 System.register(['angular'], function (_export, _context) {
+  "use strict";
+
   var angular;
   return {
     setters: [function (_angular) {
