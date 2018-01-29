@@ -83,14 +83,8 @@
       "type": "dashboard",
       "name": "NS1 Zones",
       "path": "dashboards/ns1-zones.json",
-      "addToNav": true
-    },
-    {
-      "type": "dashboard",
-      "name": "NS1 Monitors",
-      "path": "dashboards/ns1-monitors.json",
       "addToNav": true,
-      "defaultNav": true
+      "defaultNav": true      
     },
     { "type": "page", "name": "List Tasks", "component": "SnapTaskListCtrl", "role": "Viewer",  "addToNav": true},
     { "type": "page", "name": "Add Task", "component": "SnapTaskAddCtrl", "role": "Viewer",  "addToNav": true}
