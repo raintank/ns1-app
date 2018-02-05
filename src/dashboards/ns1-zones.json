@@ -1,5 +1,4 @@
 {
-  "id": null,
   "title": "NS1 Zones",
   "originalTitle": "NS1 Zones",
   "tags": [],
@@ -873,6 +872,6 @@
   },
   "refresh": false,
   "schemaVersion": 12,
-  "revision": 2,
+  "revision": 1,
   "links": []
 }

@@ -16,7 +16,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 2,
   "iteration": 1515113211493,
   "links": [],
   "panels": [
@@ -74,6 +73,6 @@
   },
   "timezone": "browser",
   "title": "NS1 Monitors",
-  "revision": 7,
+  "revision": 1,
   "overwrite": true
 }
