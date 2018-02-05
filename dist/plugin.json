@@ -2,7 +2,6 @@
   "type": "app",
   "name": "NS1 for Grafana",
   "id": "ns1-app",
-
   "staticRoot": ".",
 
   "routes": [
@@ -71,10 +70,10 @@
       {"name": "License & Terms", "url": "https://github.com/raintank/ns1-app/blob/master/LICENSE"}
     ],
     "screenshots": [
-      {"name": "Dashboard: Zones", "path": "img/ns1-dashboard-monitors.png"},
+      {"name": "Dashboard: Zones", "path": "img/ns1-dashboard-monitors.png"}
     ],
-    "version": "0.0.5",
-    "updated": "2016-06-21"
+    "version": "0.0.7",
+    "updated": "2018-02-02"
   },
 
   "includes": [
@@ -84,6 +83,13 @@
       "path": "dashboards/ns1-zones.json",
       "addToNav": true,
       "defaultNav": true
+    },
+    {
+      "type": "dashboard",
+      "name": "NS1 Monitors",
+      "path": "dashboards/ns1-monitors.json",
+      "addToNav": false,
+      "defaultNav": false
     },
     { "type": "page", "name": "List Tasks", "component": "SnapTaskListCtrl", "role": "Viewer",  "addToNav": true},
     { "type": "page", "name": "Add Task", "component": "SnapTaskAddCtrl", "role": "Viewer",  "addToNav": true}

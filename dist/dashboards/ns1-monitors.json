@@ -21,7 +21,7 @@
   "links": [],
   "panels": [
     {
-      "content": "<div style=\"margin-top:30px;text-align:center\">\n<p>Monitors have been deprecated in the NS1 Grafana app.</p>\n<p>Questions? Contact <a href=\"mailto:support@grafana.com\">support@grafana.com</a></p>\n<p>\n</div>",
+      "content": "<div style=\"margin-top:30px;text-align:center\">\n<p><em>Monitors have been deprecated in the NS1 Grafana app.</em></p>\n<p>Jump to <a href=\"/dashboard/db/ns1-zones\">NS1 Zones</a> dashboard.</p>\n<p>Questions? <a href=\"mailto:support@grafana.com\">support@grafana.com</a></p>\n<p>\n</div>",
       "gridPos": {
         "h": 4,
         "w": 24,
@@ -74,6 +74,6 @@
   },
   "timezone": "browser",
   "title": "NS1 Monitors",
-  "version": 30, 
-  "revision": 2
+  "revision": 7,
+  "overwrite": true
 }
