@@ -4,9 +4,13 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-execute');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-package-modules');
+  grunt.loadNpmTasks('grunt-babel');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   grunt.initConfig({
 
+    pkg: grunt.file.readJSON('package.json'),
     clean: ["dist"],
 
     copy: {
@@ -23,9 +27,16 @@ module.exports = function(grunt) {
       }
     },
 
+    packageModules: {
+        dist: {
+          src: 'package.json',
+          dest: 'dist/src'
+        },
+    },
+
     watch: {
       rebuild_all: {
-        files: ['src/**/*', 'README.md'],
+        files: ['src/**/*', 'README.md', '!src/node_modules/**'],
         tasks: ['default'],
         options: {spawn: false}
       },
@@ -76,8 +87,8 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          "dist/css/ns1.dark.css": "src/sass/ns1.dark.scss",
-          "dist/css/ns1.light.css": "src/sass/ns1.light.scss",
+          "dist/css/ns1.dark.css": "./src/sass/ns1.dark.scss",
+          "dist/css/ns1.light.css": "./src/sass/ns1.light.scss",
         }
       }
     }
@@ -89,7 +100,7 @@ module.exports = function(grunt) {
     'copy:src_to_dist',
     'copy:pluginDef',
     'babel',
-    // 'jshint',
-    // 'jscs',
+    'jshint',
+    'jscs',
     ]);
 };

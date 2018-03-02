@@ -36,17 +36,17 @@ class SnapTaskAddCtrl {
       } else {
         self.error ="NS1 Api Key not configured.";
       }
-    })
+    });
   }
 
   addTask() {
-    if (this.taskType == "zone") {
+    if (this.taskType === "zone") {
       this.queuedTask.push({
         type: "zone",
         zone: this.newTask.zone
       });
     }
-    if (this.taskType == "monitor") {
+    if (this.taskType === "monitor") {
       this.queuedTask.push({
         type: "monitoring",
         jobId: this.newTask.job.id,
@@ -59,13 +59,13 @@ class SnapTaskAddCtrl {
   getZones() {
     var self = this;
     return this.backendSrv.get('api/plugin-proxy/ns1-app/ns1/zones').then((resp) =>{
-        self.zones = resp;
+      self.zones = resp;
     });
   }
   getMonitoringJobs() {
     var self = this;
     return this.backendSrv.get('api/plugin-proxy/ns1-app/ns1/monitoring/jobs').then((resp) =>{
-        self.monitoringJobs = resp;
+      self.monitoringJobs = resp;
     });
   }
 
@@ -118,7 +118,6 @@ class SnapTaskAddCtrl {
     });
   }
   addMonitorTask(jobId, jobName) {
-    var taskName = "ns1-monitoring-"+jobId;
     var task = {
       "name": "ns1-monitoring-"+jobId,
       "metrics": {"/raintank/apps/ns1/monitoring/*":0},

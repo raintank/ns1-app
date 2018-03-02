@@ -1,4 +1,5 @@
 import configTemplate from './config.html!text';
+import _ from 'lodash';
 
 class Ns1ConfigCtrl {
   constructor($scope, $injector, backendSrv) {
@@ -14,8 +15,9 @@ class Ns1ConfigCtrl {
     this.appEditCtrl.setPreUpdateHook(this.preUpdate.bind(this));
     this.appEditCtrl.setPostUpdateHook(this.postUpdate.bind(this));
     var self = this;
-    if (this.appModel.enabled) {
+    if (this.appModel.enabled) { // jshint unused:false
       this.getCustomerId().then((resp) => {}, () => {
+
         // if we cant get the customerId, then we need to re-enter the ns1Token.
         self.appModel.jsonData.ns1Token = null;
         self.error = "invalid NS1 apiKey. Please update the key.";
@@ -31,17 +33,17 @@ class Ns1ConfigCtrl {
   }
 
   postUpdate() {
-  	var self = this;
+    var self = this;
     if (!this.appModel.enabled) {
       return Promise.resolve();
     }
     // make sure our Api key works.
     return this.getCustomerId()
-    .then((resp) => {
-      return this.appEditCtrl.importDashboards(); 
+    .then((resp) => { // jshint unused:false
+      return this.appEditCtrl.importDashboards();
     }, () => {
       console.log("failed to query NS1 API.");
-    	self.error = "Unable to query NS1 API. please re-enter API Key";
+      self.error = "Unable to query NS1 API. please re-enter API Key";
       self.appModel.jsonData.ns1Token = null;
     });
   }
@@ -49,7 +51,7 @@ class Ns1ConfigCtrl {
   getCustomerId() {
     return this.backendSrv.get("api/plugin-proxy/ns1-app/ns1/account/settings");
   }
-  
+
   initDatasource() {
     var self = this;
     //check for existing datasource.
@@ -103,4 +105,3 @@ Ns1ConfigCtrl.template = configTemplate;
 export {
   Ns1ConfigCtrl as ConfigCtrl
 };
-
