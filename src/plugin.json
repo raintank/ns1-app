@@ -85,13 +85,6 @@
       "addToNav": true,
       "defaultNav": true
     },
-    {
-      "type": "dashboard",
-      "name": "NS1 Monitors",
-      "path": "dashboards/ns1-monitors.json",
-      "addToNav": false,
-      "defaultNav": false
-    },
     { "type": "page", "name": "List Tasks", "component": "SnapTaskListCtrl", "role": "Viewer",  "addToNav": true},
     { "type": "page", "name": "Add Task", "component": "SnapTaskAddCtrl", "role": "Viewer",  "addToNav": true}
   ],
