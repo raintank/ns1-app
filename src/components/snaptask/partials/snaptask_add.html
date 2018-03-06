@@ -14,15 +14,32 @@
       <select type="text" class="gf-form-input max-width-20" ng-model="ctrl.newTask.zone" ng-options="item.zone as item.zone for item in ctrl.zones"/>
       <button type="submit" class="btn btn-success" ng-click="ctrl.addTask()">Add</button>
     </div>
-    <div>
-      <div ng-repeat="t in ctrl.queuedTask">
-        <ns1-new-task task="t"></ns1-new-task>
-      </div>
+    <div class="gf-form" ng-if="ctrl.queuedTask.length > 0">
+      <table class="grafana-options-table form-inline">
+        <thead>
+          <tr>
+            <th>
+              New Zones to be monitored
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="t in ctrl.queuedTask">
+            <td>
+              {{t.zone}} <a class="btn btn-danger btn-mini" ng-click="ctrl.removeQueuedTaskItem(t)">
+                <i class="fa fa-remove"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 		<div class="gf-form-button-row">
-			<button ng-if="!ctrl.creatingTasks" type="submit" class="btn btn-success" ng-click="ctrl.create()">Create</button>
-      <button ng-if="ctrl.creatingTasks" disabled type="submit" class="btn btn-success"><i class="fa fa-spinner fa-spin"></i> Create</button>
-  		<a class="btn btn-link" ng-click="ctrl.cancel();">Cancel</a>
+      <div ng-if="ctrl.creatingTasks">
+        <button disabled type="submit" class="btn btn-success"><i class="fa fa-spinner fa-spin"></i> Create</button>
+      </div>
+			<button ng-if="!ctrl.creatingTasks && ctrl.addingZones" type="submit" class="btn btn-success" ng-click="ctrl.create()">Create</button>
+      <button class="btn btn-inverse" ng-click="ctrl.cancel()">Cancel</button>
 		</div>
   </div>
 </form>

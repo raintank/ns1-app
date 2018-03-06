@@ -94,6 +94,15 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.registerTask('dev', [
+    'sass',
+    'copy:src_to_dist',
+    'copy:pluginDef',
+    'babel',
+    'jshint',
+    'jscs',
+    'watch'
+    ]);
   grunt.registerTask('default', [
     'clean',
     'sass',
@@ -102,5 +111,5 @@ module.exports = function(grunt) {
     'babel',
     'jshint',
     'jscs',
-    ]);
+  ]);
 };

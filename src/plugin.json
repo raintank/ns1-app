@@ -73,8 +73,8 @@
       {"name": "Dashboard: Zones", "path": "img/ns1-dashboard-zones.png"},
       {"name": "Dashboard: Multiple Zones", "path": "img/ns1-dashboard-zones-2.png"}
     ],
-    "version": "0.0.6",
-    "updated": "2018-02-02"
+    "version": "0.0.7",
+    "updated": "2018-03-06"
   },
 
   "includes": [
