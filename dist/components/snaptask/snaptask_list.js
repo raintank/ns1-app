@@ -110,7 +110,7 @@ System.register([], function (_export, _context) {
             var type = this.getType(task);
             if (type === "monitoringJob") {
               return "dashboard/db/ns1-monitors?&var-monitor=" + slugify(task.config['/raintank/apps/ns1'].jobName);
-            } else if (type == "zone") {
+            } else if (type === "zone") {
               return "dashboard/db/ns1-zones?&var-zone=" + slugify(task.config['/raintank/apps/ns1'].zone);
             }
           }
@@ -120,7 +120,7 @@ System.register([], function (_export, _context) {
             var type = this.getType(task);
             if (type === "monitoringJob") {
               return "Monitoring Job: " + task.config['/raintank/apps/ns1'].jobName;
-            } else if (type == "zone") {
+            } else if (type === "zone") {
               return "Zone: " + task.config['/raintank/apps/ns1'].zone;
             }
           }

@@ -73,8 +73,8 @@
       {"name": "Dashboard: Zones", "path": "img/ns1-dashboard-zones.png"},
       {"name": "Dashboard: Multiple Zones", "path": "img/ns1-dashboard-zones-2.png"}
     ],
-    "version": "0.0.6",
-    "updated": "2018-02-02"
+    "version": "0.0.7",
+    "updated": "2018-03-06"
   },
 
   "includes": [
@@ -84,13 +84,6 @@
       "path": "dashboards/ns1-zones.json",
       "addToNav": true,
       "defaultNav": true
-    },
-    {
-      "type": "dashboard",
-      "name": "NS1 Monitors",
-      "path": "dashboards/ns1-monitors.json",
-      "addToNav": false,
-      "defaultNav": false
     },
     { "type": "page", "name": "List Tasks", "component": "SnapTaskListCtrl", "role": "Viewer",  "addToNav": true},
     { "type": "page", "name": "Add Task", "component": "SnapTaskAddCtrl", "role": "Viewer",  "addToNav": true}

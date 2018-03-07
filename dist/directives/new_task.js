@@ -16,10 +16,11 @@ System.register(['angular'], function (_export, _context) {
             task: "="
           },
           link: function link(scope, element, attrs) {
+            // jshint unused:false
             var template = "";
             if (scope.task.type === "zone") {
               template = "<span>Zone: {{task.zone}}</span>";
-            } else if (scope.task.type == "monitoring") {
+            } else if (scope.task.type === "monitoring") {
               template = "<span>Monitoring Job: {{task.name}}</span>";
             }
             element.html(template);

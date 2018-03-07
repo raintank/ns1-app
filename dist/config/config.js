@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-System.register(["./config.html!text"], function (_export, _context) {
+System.register(['./config.html!text', 'lodash'], function (_export, _context) {
   "use strict";
 
-  var configTemplate, _createClass, Ns1ConfigCtrl;
+  var configTemplate, _, _createClass, Ns1ConfigCtrl;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -14,6 +14,8 @@ System.register(["./config.html!text"], function (_export, _context) {
   return {
     setters: [function (_configHtmlText) {
       configTemplate = _configHtmlText.default;
+    }, function (_lodash) {
+      _ = _lodash.default;
     }],
     execute: function () {
       _createClass = function () {
@@ -34,7 +36,7 @@ System.register(["./config.html!text"], function (_export, _context) {
         };
       }();
 
-      _export("ConfigCtrl", Ns1ConfigCtrl = function () {
+      _export('ConfigCtrl', Ns1ConfigCtrl = function () {
         function Ns1ConfigCtrl($scope, $injector, backendSrv) {
           _classCallCheck(this, Ns1ConfigCtrl);
 
@@ -51,7 +53,9 @@ System.register(["./config.html!text"], function (_export, _context) {
           this.appEditCtrl.setPostUpdateHook(this.postUpdate.bind(this));
           var self = this;
           if (this.appModel.enabled) {
+            // jshint unused:false
             this.getCustomerId().then(function (resp) {}, function () {
+
               // if we cant get the customerId, then we need to re-enter the ns1Token.
               self.appModel.jsonData.ns1Token = null;
               self.error = "invalid NS1 apiKey. Please update the key.";
@@ -60,7 +64,7 @@ System.register(["./config.html!text"], function (_export, _context) {
         }
 
         _createClass(Ns1ConfigCtrl, [{
-          key: "preUpdate",
+          key: 'preUpdate',
           value: function preUpdate() {
             if (this.appModel.secureJsonData.gnet_token) {
               this.appModel.jsonData.gnetTokenSet = true;
@@ -68,7 +72,7 @@ System.register(["./config.html!text"], function (_export, _context) {
             return this.initDatasource();
           }
         }, {
-          key: "postUpdate",
+          key: 'postUpdate',
           value: function postUpdate() {
             var _this = this;
 
@@ -78,6 +82,7 @@ System.register(["./config.html!text"], function (_export, _context) {
             }
             // make sure our Api key works.
             return this.getCustomerId().then(function (resp) {
+              // jshint unused:false
               return _this.appEditCtrl.importDashboards();
             }, function () {
               console.log("failed to query NS1 API.");
@@ -86,12 +91,12 @@ System.register(["./config.html!text"], function (_export, _context) {
             });
           }
         }, {
-          key: "getCustomerId",
+          key: 'getCustomerId',
           value: function getCustomerId() {
             return this.backendSrv.get("api/plugin-proxy/ns1-app/ns1/account/settings");
           }
         }, {
-          key: "initDatasource",
+          key: 'initDatasource',
           value: function initDatasource() {
             var self = this;
             //check for existing datasource.
@@ -147,7 +152,7 @@ System.register(["./config.html!text"], function (_export, _context) {
 
       Ns1ConfigCtrl.template = configTemplate;
 
-      _export("ConfigCtrl", Ns1ConfigCtrl);
+      _export('ConfigCtrl', Ns1ConfigCtrl);
     }
   };
 });

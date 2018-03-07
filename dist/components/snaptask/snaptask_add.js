@@ -45,6 +45,7 @@ System.register(["lodash"], function (_export, _context) {
           this.$scope = $scope;
           this.pageReady = true;
           this.creatingTasks = false;
+          this.addingZones = false;
           this.error = null;
           this.zones = [];
           this.monitoringJobs = [];
@@ -63,6 +64,7 @@ System.register(["lodash"], function (_export, _context) {
             this.queuedTask = [];
             this.newTak = {};
             this.taskType = "";
+            window.history.back();
           }
         }, {
           key: "getConfig",
@@ -78,22 +80,48 @@ System.register(["lodash"], function (_export, _context) {
             });
           }
         }, {
+          key: "queuedTaskExists",
+          value: function queuedTaskExists(t) {
+            for (var i = 0; i < this.queuedTask.length; i++) {
+              var aQueuedTask = this.queuedTask[i];
+              if (aQueuedTask.zone === t.zone) {
+                return true;
+              }
+            }
+            return false;
+          }
+        }, {
           key: "addTask",
           value: function addTask() {
-            if (this.taskType == "zone") {
+            // make sure a zone was selected
+            if (this.newTask.zone === undefined || this.newTask.zone === "") {
+              this.$scope.$root.appEvent('alert-error', ['Select a Zone from the dropdown', '']);
+              // clear
+              this.newTask = {};
+              return;
+            }
+            // check if it already exists in the list
+            if (!this.queuedTaskExists(this.newTask)) {
               this.queuedTask.push({
                 type: "zone",
                 zone: this.newTask.zone
               });
+              this.addingZones = true;
+            } else {
+              this.$scope.$root.appEvent('alert-warning', ['Zone already queued for creation', '']);
             }
-            if (this.taskType == "monitor") {
-              this.queuedTask.push({
-                type: "monitoring",
-                jobId: this.newTask.job.id,
-                name: this.newTask.job.name
-              });
-            }
+            // always clear
             this.newTask = {};
+          }
+        }, {
+          key: "removeQueuedTaskItem",
+          value: function removeQueuedTaskItem(t) {
+            if (this.queuedTask) {
+              this.queuedTask.splice(this.queuedTask.indexOf(t), 1);
+              if (this.queuedTask.length === 0) {
+                this.addingZones = false;
+              }
+            }
           }
         }, {
           key: "getZones",
@@ -118,18 +146,14 @@ System.register(["lodash"], function (_export, _context) {
             this.creatingTasks = true;
             var promises = [];
             _.forEach(this.queuedTask, function (task) {
-              if (task.type === "zone") {
-                promises.push(self.addZoneTask(task.zone));
-              }
-              if (task.type === "monitoring") {
-                promises.push(self.addMonitorTask(task.jobId, task.name));
-              }
+              promises.push(self.addZoneTask(task.zone));
             });
 
             this.$q.all(promises).then(function () {
               console.log("finished creating tasks.");
               self.queuedTask = [];
               self.creatingTasks = false;
+              self.addingZones = false;
               self.$location.path("plugins/ns1-app/page/list-tasks");
             }, function (resp) {
               console.log("failed to add all tasks.", resp);
@@ -160,34 +184,6 @@ System.register(["lodash"], function (_export, _context) {
               if (resp.meta.code !== 200) {
                 console.log("request failed.", resp.meta.message);
                 return _this.$q.reject(resp.meta.message);
-              }
-            });
-          }
-        }, {
-          key: "addMonitorTask",
-          value: function addMonitorTask(jobId, jobName) {
-            var _this2 = this;
-
-            var taskName = "ns1-monitoring-" + jobId;
-            var task = {
-              "name": "ns1-monitoring-" + jobId,
-              "metrics": { "/raintank/apps/ns1/monitoring/*": 0 },
-              "config": {
-                "/raintank/apps/ns1": {
-                  "ns1_key": this.ns1Token,
-                  "jobId": jobId,
-                  "jobName": jobName
-                }
-              },
-              "interval": 300,
-              "route": { "type": "any" },
-              "enabled": true
-            };
-
-            return this.backendSrv.post("api/plugin-proxy/ns1-app/tasks", task).then(function (resp) {
-              if (resp.meta.code !== 200) {
-                console.log("request failed.", resp.meta.message);
-                return _this2.$q.reject(resp.meta.message);
               }
             });
           }

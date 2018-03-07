@@ -1,9 +1,11 @@
 <div class="page-header">
   <h1 class="rt-h1">NS1 Tasks</h1>
-  <a class="btn btn-success" href="plugins/ns1-app/page/add-task">
-    <i class="fa fa-plus"></i>
-    Add Task
-  </a>
+  <div ng-if="ctrl.tasks.length > 0">
+    <a class="btn btn-success" href="plugins/ns1-app/page/add-task">
+      <i class="fa fa-plus"></i>
+      Add Task
+    </a>
+  </div>
 </div>
 
 <div ng-if="!ctrl.pageReady">
@@ -21,7 +23,10 @@
         <a class="highlight-word" href="plugins/ns1-app/page/add-task">Add a new task</a>
       </p>
       <p ng-if="!ctrl.isOrgEditor">Looks like you don’t have any zones or monitors connected yet.<br>
-        <a class="highlight-word" href="plugins/ns1-app/page/add-task">Add a new task</a>
+        <a class="btn btn-success" href="plugins/ns1-app/page/add-task">
+          <i class="fa fa-plus"></i>
+          Add a new task
+        </a>
       </p>
     </div>
   </div>
