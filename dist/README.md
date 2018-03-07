@@ -3,7 +3,7 @@
 The NS1 Grafana App gives you a real-time view into DNS traffic and monitoring jobs configured within the NS1 platform.
 
 ## Requirements
-The NS1 app requires a Grafana.net account, [Grafana 3.0](https://grafana.org) (or higher) and an [NS1 account](https://ns1.com/signup?plan=startup). There are no other external dependencies, accounts or configurations needed.
+The NS1 app requires a Grafana.com account, [Grafana 3.0](https://grafana.org) (or higher) and an [NS1 account](https://ns1.com/signup?plan=startup). There are no other external dependencies, accounts or configurations needed.
 
 ## Features
 Give your team a quick view into DNS traffic and infrastructure health. This app provides instant visibility into query-per-second (QPS) traffic and NS1’s built-in high frequency monitoring service.

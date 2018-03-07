@@ -3,13 +3,13 @@
 <div class="ns1-installation-number--group">
 	<span class="ns1-installation-number--h3">1</span><h3 class="page-heading ns1-installation-number--h3-lockup">Enter Grafana.com Credentials</h3>
 </div>
-<p><a class="highlight-word" href="//grafana.net/profile/api-keys" target="_blank">Generate a new Grafana.com API key with Role: Editor</a> or <a class="highlight-word" href="//grafana.net/signup" target="_blank">sign up for free.</a></p>
+<p><a class="highlight-word" href="//grafana.com/profile/api-keys" target="_blank">Generate a new Grafana.com API key with Role: Editor</a> or <a class="highlight-word" href="//grafana.com/signup" target="_blank">sign up for free.</a></p>
 <div class="gf-form-group">
 	<div class="gf-form">
 		<label class="gf-form-label width-10">grafana.com API Key</label>
 		<!-- Hidden input to stop chrome from autofilling -->
 		<input style="display:none;" type="password" name="gnet_token"/>
-		<input type="password" class="gf-form-input max-width-20" ng-model="ctrl.appModel.secureJsonData.gnet_token" placeholder="Grafana.net API Key" ng-show="!ctrl.appModel.jsonData.gnetTokenSet" />
+		<input type="password" class="gf-form-input max-width-20" ng-model="ctrl.appModel.secureJsonData.gnet_token" placeholder="Grafana.com API Key" ng-show="!ctrl.appModel.jsonData.gnetTokenSet" />
 		<input type="text" class="gf-form-input max-width-20" disabled="disabled" value="saved" ng-show="ctrl.appModel.jsonData.gnetTokenSet" />
 		<a href="#" ng-click="ctrl.appModel.jsonData.gnetTokenSet=false" ng-if="ctrl.appModel.jsonData.gnetTokenSet">reset</a>
 	</div>
