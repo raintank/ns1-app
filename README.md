@@ -1,20 +1,16 @@
 [NS1](https://ns1.com) is an intelligent DNS and traffic management platform with a unique Filter Chain™ routing engine. NS1’s technology leverages infrastructure, application and network data to make intelligent routing decisions in real time, ensuring optimal application performance and reliability.
 
-The NS1 Grafana App gives you a real-time view into DNS traffic and monitoring jobs configured within the NS1 platform.
+The NS1 Grafana App gives you a real-time view into DNS traffic within zones hosted on the NS1 platform.
 
 ## Requirements
 The NS1 app requires a Grafana.com account, [Grafana 3.0](https://grafana.org) (or higher) and an [NS1 account](https://ns1.com/signup?plan=startup). There are no other external dependencies, accounts or configurations needed.
 
 ## Features
-Give your team a quick view into DNS traffic and infrastructure health. This app provides instant visibility into query-per-second (QPS) traffic and NS1’s built-in high frequency monitoring service.
+Give your team a quick view into DNS traffic and visibility into per-zone query-per-second (QPS) data.
 
 ### Supported metrics
-- Queries per second, broken down by zone
-- DNS monitoring
-- HTTP monitoring
-- Ping (ICMP) monitoring
-- TCP monitoring
-- NS1 monitoring from multiple regions with rapid recheck to prevent false positives
+- Total Queries per second
+- Queries per second broken down by zone
 
 ## Getting Help
 
